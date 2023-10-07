@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2x0ylmtedw57"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_cfp2j"]
+
+[node name="Character" type="CharacterBody3D"]
+script = ExtResource("1_cfp2j")
+
+[node name="Pivot" type="Node3D" parent="."]
