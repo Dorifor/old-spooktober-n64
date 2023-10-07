@@ -12,7 +12,7 @@ uv1_offset = Vector3(4.235, 0, 0)
 [sub_resource type="BoxMesh" id="BoxMesh_wuvno"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_byqca"]
-albedo_color = Color(1, 0.443137, 0.321569, 1)
+albedo_color = Color(0, 0, 0, 1)
 
 [node name="Main Scene" type="Node3D"]
 
