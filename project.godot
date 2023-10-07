@@ -13,11 +13,12 @@ config_version=5
 config/name="Spooktober N64"
 run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
+boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
 config/icon="res://assets/icon.svg"
 
 [display]
 
-window/size/viewport_width=648
-window/size/viewport_height=430
+window/size/viewport_width=748
+window/size/viewport_height=530
 window/size/resizable=false
 window/stretch/mode="viewport"

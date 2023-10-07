@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://b5litlk2cojfb"
-path="res://.godot/imported/Humanoid.fbx-cb2d9ebe98a53afcc0e3881b7790cca0.scn"
+uid="uid://j5uva36xd182"
+path="res://.godot/imported/Cube.fbx-0b537e31721f9b0ea19cc05812b9bcea.scn"
 
 [deps]
 
-source_file="res://assets/Player/Humanoid.fbx"
-dest_files=["res://.godot/imported/Humanoid.fbx-cb2d9ebe98a53afcc0e3881b7790cca0.scn"]
+source_file="res://assets/Player/Cube.fbx"
+dest_files=["res://.godot/imported/Cube.fbx-0b537e31721f9b0ea19cc05812b9bcea.scn"]
 
 [params]
 
