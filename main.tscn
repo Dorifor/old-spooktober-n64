@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgqo0b136igfq"]
+
+[ext_resource type="Texture2D" uid="uid://bqkvsrtxrru87" path="res://assets/Planks/test_32x32_0.png" id="1_b2enx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmnqh"]
+albedo_texture = ExtResource("1_b2enx")
+uv1_scale = Vector3(6.75, 6.75, 6.75)
+uv1_offset = Vector3(4.235, 0, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fxamy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wuvno"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_byqca"]
+albedo_color = Color(1, 0.443137, 0.321569, 1)
+
+[node name="Main Scene" type="Node3D"]
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_lmnqh")
+mesh = SubResource("PlaneMesh_fxamy")
+
+[node name="Block" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.54362, 0, 0, 0, 0.2, 0, 0, 0, 1, -0.6, 0.1, 0)
+mesh = SubResource("BoxMesh_wuvno")
+surface_material_override/0 = SubResource("StandardMaterial3D_byqca")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.659083, -0.387873, 0.644332, 0, 0.856745, 0.515741, -0.75207, -0.339916, 0.564666, 0.974211, 0.840352, 0.819908)
+current = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, 2.10734e-08, -0.707107, 0.612372, 0.5, 0.612372, 0.353553, -0.866025, 0.353553, -3.33941, 4.3379, 2.33659)
+shadow_enabled = true
+shadow_blur = 0.5
