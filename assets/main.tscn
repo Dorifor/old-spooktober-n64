@@ -117,6 +117,9 @@ bones/36/scale = Vector3(1, 1.07336, 0.945674)
 [node name="HumanoidBase_NotOverlapping" parent="Player/visuals/Player/RootNode/metarig/Skeleton3D" index="0"]
 gi_mode = 0
 
+[node name="BoneAttachment3D" parent="Player/visuals/Player/RootNode/metarig/Skeleton3D" index="1"]
+transform = Transform3D(-1.05493, 0.214728, -0.021161, -0.173775, -0.220495, -0.908722, -0.269073, -0.959523, 0.193621, -0.00333418, -0.00136264, 0.00930396)
+
 [node name="AnimationTree" parent="Player/visuals/Player" index="1"]
 parameters/Walk/Blend2/blend_amount = 0
 
