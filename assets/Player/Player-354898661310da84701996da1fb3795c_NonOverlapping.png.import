@@ -2,17 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvdhqyp8rqiex"
-path.s3tc="res://.godot/imported/Player-96878cc2017709d4e7c7aeaabb880b49_NonOverlapping (Custom).png-e86b9ba38826e303510b6ec9fd867674.s3tc.ctex"
+uid="uid://d031cum8wivfr"
+path.s3tc="res://.godot/imported/Player-354898661310da84701996da1fb3795c_NonOverlapping.png-13acd73d70e64c97ec6b8b3365bea7f5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://assets/player/Player-96878cc2017709d4e7c7aeaabb880b49_NonOverlapping (Custom).png"
-dest_files=["res://.godot/imported/Player-96878cc2017709d4e7c7aeaabb880b49_NonOverlapping (Custom).png-e86b9ba38826e303510b6ec9fd867674.s3tc.ctex"]
+source_file="res://assets/player/Player-354898661310da84701996da1fb3795c_NonOverlapping.png"
+dest_files=["res://.godot/imported/Player-354898661310da84701996da1fb3795c_NonOverlapping.png-13acd73d70e64c97ec6b8b3365bea7f5.s3tc.ctex"]
 
 [params]
 
