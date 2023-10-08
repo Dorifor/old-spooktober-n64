@@ -22,15 +22,20 @@ func _ready():
 	animation_tree.active = true
 
 func _input(event):
-	var horizontal_sens = Globals.HORIZONTAL_SENSIBILITY_VALUE 
+	
+	var horizontal_sens = Globals.HORIZONTAL_SENSIBILITY_VALUE
 	var vertical_sens = Globals.VERTICAL_SENSIBILITY_VALUE 
+	
 	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(-event.relative.x * horizontal_sens))
 		rig.rotate_y(deg_to_rad(event.relative.x * horizontal_sens))
-		var rad = (deg_to_rad(-event.relative.y * vertical_sens))
-		camera_mount.rotate_x(rad)
-		clamp(camera_mount.rotation.x, -PI, PI / 2)
-	if event is InputEventKey and event.is_action("pause") and event.pressed:
+		
+		camera_mount.rotate_x((deg_to_rad(-event.relative.y * vertical_sens)))
+		var camera_rotation = camera_mount.rotation_degrees
+		camera_rotation.x = clamp(camera_rotation.x, -30, 30)
+		camera_mount.rotation_degrees = camera_rotation
+		
+	if event is InputEventKey and event.is_action("pause"):
 		pause()
 
 func _process(delta):
