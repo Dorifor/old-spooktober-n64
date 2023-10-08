@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cre44bvxrpn1u"]
+[gd_scene load_steps=9 format=3 uid="uid://cre44bvxrpn1u"]
 
 [ext_resource type="Texture2D" uid="uid://bqkvsrtxrru87" path="res://assets/Planks/test_32x32_0.png" id="1_nmj8c"]
 [ext_resource type="PackedScene" path="res://assets/Player/Player.tscn" id="2_cw4q1"]
+[ext_resource type="PackedScene" uid="uid://88yv727qgtc4" path="res://assets/UI/Pause Menu/pause_menu.tscn" id="3_abh5i"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmnqh"]
 albedo_texture = ExtResource("1_nmj8c")
@@ -42,8 +43,9 @@ transform = Transform3D(0.707107, 2.10734e-08, -0.707107, 0.612372, 0.5, 0.61237
 shadow_enabled = true
 shadow_blur = 0.5
 
-[node name="Player" parent="." instance=ExtResource("2_cw4q1")]
+[node name="Player" parent="." node_paths=PackedStringArray("pause_menu") instance=ExtResource("2_cw4q1")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.123791, 0.000500083, 0.164138)
+pause_menu = NodePath("../Pause Menu")
 
 [node name="metarig" parent="Player/visuals/Player/RootNode" index="0"]
 transform = Transform3D(108.73, -1.41002, 0.179427, -0.246713, -2.43034, 90.6271, -1.40485, -108.704, -2.02852, -0.0311641, -0.0183162, 0.0516432)
@@ -93,5 +95,9 @@ bones/35/rotation = Quaternion(-0.55044, 0.0807515, -0.0355085, 0.830201)
 bones/35/scale = Vector3(1.00138, 1.17727, 0.854313)
 bones/36/rotation = Quaternion(-6.15555e-08, 0.948015, -0.318227, -1.47827e-07)
 bones/36/scale = Vector3(1, 1.07149, 0.947147)
+
+[node name="Pause Menu" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_abh5i")]
+visible = false
+player = NodePath("../Player")
 
 [editable path="Player"]

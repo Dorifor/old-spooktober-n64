@@ -7,7 +7,7 @@
 [ext_resource type="StyleBox" uid="uid://cnt2xr5tgk1jd" path="res://assets/UI/ui_styles/button_red_pressed.tres" id="5_xc1o2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wf0e0"]
-bg_color = Color(0, 0, 0, 0.352941)
+bg_color = Color(0, 0, 0, 0.619608)
 
 [sub_resource type="LabelSettings" id="LabelSettings_butog"]
 font_size = 32
