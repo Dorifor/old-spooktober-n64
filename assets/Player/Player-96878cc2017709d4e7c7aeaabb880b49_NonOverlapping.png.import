@@ -1,0 +1,36 @@
+[remap]
+
+importer="texture"
+type="CompressedTexture2D"
+uid="uid://cju005rpepx62"
+path.s3tc="res://.godot/imported/Player-96878cc2017709d4e7c7aeaabb880b49_NonOverlapping.png-75077a8667bc321f3de4b4f6c0ca7efe.s3tc.ctex"
+metadata={
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
+}
+generator_parameters={}
+
+[deps]
+
+source_file="res://assets/Player/Player-96878cc2017709d4e7c7aeaabb880b49_NonOverlapping.png"
+dest_files=["res://.godot/imported/Player-96878cc2017709d4e7c7aeaabb880b49_NonOverlapping.png-75077a8667bc321f3de4b4f6c0ca7efe.s3tc.ctex"]
+
+[params]
+
+compress/mode=2
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/hdr_compression=1
+compress/normal_map=0
+compress/channel_pack=0
+mipmaps/generate=true
+mipmaps/limit=-1
+roughness/mode=0
+roughness/src_normal=""
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/normal_map_invert_y=false
+process/hdr_as_srgb=false
+process/hdr_clamp_exposure=false
+process/size_limit=0
+detect_3d/compress_to=0

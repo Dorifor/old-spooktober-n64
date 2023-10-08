@@ -1,7 +1,8 @@
 extends CharacterBody3D
 
 
-var SPEED = 1.0
+var SPEED = 2.0
+var paused = false
 const JUMP_VELOCITY = 1.5
 
 @export var horizontal_sens = 0.5
@@ -11,6 +12,7 @@ const JUMP_VELOCITY = 1.5
 
 @export var rig: Node3D
 @export var camera_mount: Node3D
+@export var pause_menu: Control
 
 @onready var animation_tree : AnimationTree = $visuals/Player/AnimationTree
 
@@ -23,18 +25,25 @@ func _ready():
 	animation_tree.active = true
 	
 
+func pause():
+	paused = true
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	pause_menu.visible = true
+
 func _input(event):
+	if paused: return
 	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(-event.relative.x * horizontal_sens))
 		rig.rotate_y(deg_to_rad(event.relative.x * horizontal_sens))
 		camera_mount.rotate_x((deg_to_rad(-event.relative.y * vertical_sens)))
 	if event is InputEventKey and event.is_action("pause"):
-		get_tree().quit()
+		pause()
 
 func _process(delta):
 	update_animation_parameters()
 	
 func _physics_process(delta):
+	if paused: return
 	if Input.is_action_pressed("run"):
 		SPEED = run_speed
 	else:

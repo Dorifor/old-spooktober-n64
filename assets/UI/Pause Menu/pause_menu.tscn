@@ -1,13 +1,13 @@
 [gd_scene load_steps=8 format=3 uid="uid://88yv727qgtc4"]
 
-[ext_resource type="Script" path="res://pause_menu_manager.gd" id="1_vxtue"]
-[ext_resource type="StyleBox" uid="uid://cc1f4h78vi2h" path="res://ui_styles/button_red.tres" id="2_qxklp"]
-[ext_resource type="Theme" uid="uid://dxs16nfa1bvuo" path="res://ui_styles/basic_theme.tres" id="2_wncfl"]
-[ext_resource type="StyleBox" uid="uid://b7m3eco1oujqm" path="res://ui_styles/button_red_hover.tres" id="3_1fwkl"]
-[ext_resource type="StyleBox" uid="uid://cnt2xr5tgk1jd" path="res://ui_styles/button_red_pressed.tres" id="4_1gdm1"]
+[ext_resource type="Script" path="res://assets/UI/Pause Menu/pause_menu_manager.gd" id="1_yjqan"]
+[ext_resource type="Theme" uid="uid://dxs16nfa1bvuo" path="res://assets/UI/ui_styles/basic_theme.tres" id="2_3x34l"]
+[ext_resource type="StyleBox" uid="uid://cc1f4h78vi2h" path="res://assets/UI/ui_styles/button_red.tres" id="3_43hq6"]
+[ext_resource type="StyleBox" uid="uid://b7m3eco1oujqm" path="res://assets/UI/ui_styles/button_red_hover.tres" id="4_ylpx6"]
+[ext_resource type="StyleBox" uid="uid://cnt2xr5tgk1jd" path="res://assets/UI/ui_styles/button_red_pressed.tres" id="5_xc1o2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wf0e0"]
-bg_color = Color(0, 0, 0, 0.352941)
+bg_color = Color(0, 0, 0, 0.619608)
 
 [sub_resource type="LabelSettings" id="LabelSettings_butog"]
 font_size = 32
@@ -19,7 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_vxtue")
+script = ExtResource("1_yjqan")
 
 [node name="Background" type="Panel" parent="."]
 layout_mode = 1
@@ -96,14 +96,14 @@ step = 0.05
 
 [node name="Return Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme = ExtResource("2_wncfl")
+theme = ExtResource("2_3x34l")
 text = "RETURN"
 
 [node name="Quit Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_styles/normal = ExtResource("2_qxklp")
-theme_override_styles/hover = ExtResource("3_1fwkl")
-theme_override_styles/pressed = ExtResource("4_1gdm1")
+theme_override_styles/normal = ExtResource("3_43hq6")
+theme_override_styles/hover = ExtResource("4_ylpx6")
+theme_override_styles/pressed = ExtResource("5_xc1o2")
 text = "QUIT GAME"
 
 [connection signal="value_changed" from="VBoxContainer/Horizontal Sensibility/Horizontal Slider" to="." method="_on_horizontal_slider_value_changed"]
