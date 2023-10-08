@@ -5,9 +5,8 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmnqh"]
 albedo_texture = ExtResource("1_b2enx")
-heightmap_scale = 16.0
-uv1_scale = Vector3(100, 100, 100)
-uv2_scale = Vector3(0, 0, 0)
+uv1_scale = Vector3(6.75, 6.75, 6.75)
+uv1_offset = Vector3(4.235, 0, 0)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_fxamy"]
 
@@ -22,7 +21,6 @@ albedo_color = Color(0, 0, 0, 1)
 [node name="Main Scene" type="Node3D"]
 
 [node name="Ground" type="StaticBody3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 
 [node name="MeshGround" type="MeshInstance3D" parent="Ground"]
 material_override = SubResource("StandardMaterial3D_lmnqh")
@@ -46,5 +44,3 @@ shadow_blur = 0.5
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.123791, 0.000500083, 0.164138)
 sens_horizontal = 0.1
 sens_vertical = 0.1
-walking_speed = 1.0
-run_speed = 2
