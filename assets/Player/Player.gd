@@ -30,7 +30,7 @@ func _input(event):
 		var rad = (deg_to_rad(-event.relative.y * vertical_sens))
 		camera_mount.rotate_x(rad)
 		clamp(camera_mount.rotation.x, -PI, PI / 2)
-	if event is InputEventKey and event.is_action("pause"):
+	if event is InputEventKey and event.is_action("pause") and event.pressed:
 		pause()
 
 func _process(delta):
