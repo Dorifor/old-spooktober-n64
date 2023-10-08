@@ -44,7 +44,5 @@ shadow_blur = 0.5
 
 [node name="Player" parent="." instance=ExtResource("2_kn1dc")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.123791, 0.000500083, 0.164138)
-sens_horizontal = 0.1
-sens_vertical = 0.1
-walking_speed = 1.0
-run_speed = 2
+
+[editable path="Player"]
