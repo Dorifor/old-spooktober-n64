@@ -2,13 +2,10 @@ extends CharacterBody3D
 
 
 var SPEED = 2.0
-var paused = false
-const JUMP_VELOCITY = 1.5
 
-@export var horizontal_sens = 0.5
-@export var vertical_sens = 0.5
 @export var walking_speed = 0.1
 @export var run_speed = 2
+@export var jump_velocity = 2.3
 
 @export var rig: Node3D
 @export var camera_mount: Node3D
@@ -23,15 +20,10 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	animation_tree.active = true
-	
-
-func pause():
-	paused = true
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	pause_menu.visible = true
 
 func _input(event):
-	if paused: return
+	var horizontal_sens = Globals.HORIZONTAL_SENSIBILITY_VALUE 
+	var vertical_sens = Globals.VERTICAL_SENSIBILITY_VALUE 
 	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(-event.relative.x * horizontal_sens))
 		rig.rotate_y(deg_to_rad(event.relative.x * horizontal_sens))
@@ -41,9 +33,8 @@ func _input(event):
 
 func _process(delta):
 	update_animation_parameters()
-	
+
 func _physics_process(delta):
-	if paused: return
 	if Input.is_action_pressed("run"):
 		SPEED = run_speed
 	else:
@@ -55,7 +46,7 @@ func _physics_process(delta):
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+		velocity.y = jump_velocity
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -71,6 +62,12 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+
+func pause():
+	Globals.IS_GAME_PAUSED = true
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	pause_menu.visible = true
+	get_tree().paused = true
 
 func update_animation_parameters():
 	var state_machine = animation_tree["parameters/playback"]
