@@ -27,7 +27,9 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		rotate_y(deg_to_rad(-event.relative.x * horizontal_sens))
 		rig.rotate_y(deg_to_rad(event.relative.x * horizontal_sens))
-		camera_mount.rotate_x((deg_to_rad(-event.relative.y * vertical_sens)))
+		var rad = (deg_to_rad(-event.relative.y * vertical_sens))
+		camera_mount.rotate_x(rad)
+		clamp(camera_mount.rotation.x, -PI, PI / 2)
 	if event is InputEventKey and event.is_action("pause"):
 		pause()
 
