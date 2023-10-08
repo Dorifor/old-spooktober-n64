@@ -31,7 +31,6 @@ func _input(event):
 		rig.rotate_y(deg_to_rad(event.relative.x * horizontal_sens))
 		
 		camera_mount.rotate_x((deg_to_rad(-event.relative.y * vertical_sens)))
-		
 		var camera_rotation = camera_mount.rotation_degrees
 		camera_rotation.x = clamp(camera_rotation.x, -30, 30)
 		camera_mount.rotation_degrees = camera_rotation
