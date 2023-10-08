@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cre44bvxrpn1u"]
+[gd_scene load_steps=10 format=3 uid="uid://cre44bvxrpn1u"]
 
 [ext_resource type="Texture2D" uid="uid://bqkvsrtxrru87" path="res://assets/Planks/test_32x32_0.png" id="1_nmj8c"]
-[ext_resource type="PackedScene" uid="uid://b2x0ylmtedw57" path="res://assets/Player/Player.tscn" id="2_cw4q1"]
+[ext_resource type="PackedScene" uid="uid://dwi6774fpqp26" path="res://assets/Player/Player.tscn" id="2_cw4q1"]
 [ext_resource type="PackedScene" uid="uid://88yv727qgtc4" path="res://assets/UI/Pause Menu/pause_menu.tscn" id="3_abh5i"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmnqh"]
@@ -15,7 +15,20 @@ uv2_scale = Vector3(0, 0, 0)
 [sub_resource type="BoxShape3D" id="BoxShape3D_t0qas"]
 size = Vector3(2.00212, 0.001, 1.99652)
 
+[sub_resource type="BoxMesh" id="BoxMesh_wuvno"]
+size = Vector3(1, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_byqca"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hth55"]
+size = Vector3(1, 0.2, 1)
+
 [node name="Main Scene" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -1.47514e-07, -0.707106, 0.612372, 0.5, 0.612373, 0.353553, -0.866025, 0.353554, -3.33941, 4.3379, 2.33659)
+shadow_blur = 0.5
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
@@ -28,20 +41,58 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("BoxShape3D_t0qas")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.707107, 2.10734e-08, -0.707107, 0.612372, 0.5, 0.612372, 0.353553, -0.866025, 0.353553, -3.33941, 4.3379, 2.33659)
-shadow_enabled = true
-shadow_blur = 0.5
+[node name="Box" type="StaticBody3D" parent="."]
+
+[node name="Block" type="MeshInstance3D" parent="Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.1, 0)
+mesh = SubResource("BoxMesh_wuvno")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_byqca")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.1, 0)
+shape = SubResource("BoxShape3D_hth55")
 
 [node name="Player" parent="." node_paths=PackedStringArray("pause_menu") instance=ExtResource("2_cw4q1")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.123791, 0.000500083, 0.164138)
 pause_menu = NodePath("../Pause Menu")
 
 [node name="metarig" parent="Player/visuals/Player/RootNode" index="0"]
-transform = Transform3D(108.263, -2.99779, 8.10223, -9.76813, -1.69438, 90.2724, -2.83384, -108.686, -1.63079, -0.0798438, -0.0217626, 0.0308427)
+transform = Transform3D(108.24, -2.90039, 8.33956, -10.0431, -1.37527, 90.2552, -2.76122, -108.693, -1.36452, -0.0788961, -0.0211029, 0.0296586)
+
+[node name="Skeleton3D" parent="Player/visuals/Player/RootNode/metarig" index="0"]
+bones/1/rotation = Quaternion(-0.0693065, -0.00759183, 0.0296101, 0.997127)
+bones/2/rotation = Quaternion(-0.0933324, 0.00448851, 0.0615966, 0.993718)
+bones/3/rotation = Quaternion(0.00176236, 0.00513779, 0.061169, 0.998113)
+bones/4/rotation = Quaternion(0.234376, -0.00390781, -0.0108555, 0.972078)
+bones/5/rotation = Quaternion(-0.102291, -0.00540879, -0.00996795, 0.99469)
+bones/6/rotation = Quaternion(-0.107594, -0.00295296, -0.0110594, 0.994129)
+bones/8/rotation = Quaternion(-0.475215, -0.505868, -0.364294, 0.620933)
+bones/8/scale = Vector3(1.18643, 1.01515, 0.833974)
+bones/9/rotation = Quaternion(-0.429505, 0.598092, -0.61115, 0.290358)
+bones/9/scale = Vector3(1.00487, 1.19453, 0.834579)
+bones/11/rotation = Quaternion(0.019815, -0.232981, -0.102054, 0.966909)
+bones/11/scale = Vector3(1.03151, 1.00137, 0.97653)
+bones/13/rotation = Quaternion(-0.502539, 0.448682, 0.330855, 0.660813)
+bones/13/scale = Vector3(1.16346, 1.03955, 0.835566)
+bones/14/rotation = Quaternion(0.261405, 0.629941, -0.593866, -0.426807)
+bones/14/scale = Vector3(1.00798, 1.19222, 0.83428)
+bones/15/rotation = Quaternion(0.16394, -0.0183842, 0.0673267, 0.983998)
+bones/16/rotation = Quaternion(-0.0626472, 0.0971226, 0.119745, 0.986055)
+bones/26/rotation = Quaternion(0.931793, 0.132954, -0.150239, 0.302512)
+bones/26/scale = Vector3(1.02068, 1.05459, 0.944992)
+bones/27/rotation = Quaternion(0.264604, -0.0857801, -0.051266, 0.959166)
+bones/27/scale = Vector3(1.00292, 1.04923, 0.962195)
+bones/28/rotation = Quaternion(-0.527782, -0.0885422, 0.097637, 0.839091)
+bones/28/scale = Vector3(1.00032, 1.17202, 0.860177)
+bones/33/rotation = Quaternion(0.981233, 0.110792, 0.0306576, 0.154813)
+bones/33/scale = Vector3(1.00011, 1.01564, 0.988905)
+bones/34/rotation = Quaternion(0.132545, 0.0509437, -0.0215366, 0.989633)
+bones/34/scale = Vector3(1.00176, 1.01094, 0.991091)
+bones/35/rotation = Quaternion(-0.563754, -0.0304587, 0.0633406, 0.822947)
 
 [node name="HumanoidBase_NotOverlapping" parent="Player/visuals/Player/RootNode/metarig/Skeleton3D" index="0"]
-cast_shadow = 0
+gi_mode = 0
 
 [node name="AnimationTree" parent="Player/visuals/Player" index="1"]
 parameters/Walk/Blend2/blend_amount = 0
