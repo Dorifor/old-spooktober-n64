@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://e1fjvhoaiask"
-path="res://.godot/imported/anim_walk.fbx-6d6c3aea5583a908d204832e09483bd0.scn"
+uid="uid://cc1g4fot55gtq"
+path="res://.godot/imported/Player.fbx-96878cc2017709d4e7c7aeaabb880b49.scn"
 
 [deps]
 
-source_file="res://animations/anim_walk.fbx"
-dest_files=["res://.godot/imported/anim_walk.fbx-6d6c3aea5583a908d204832e09483bd0.scn"]
+source_file="res://assets/Player/Player.fbx"
+dest_files=["res://.godot/imported/Player.fbx-96878cc2017709d4e7c7aeaabb880b49.scn"]
 
 [params]
 

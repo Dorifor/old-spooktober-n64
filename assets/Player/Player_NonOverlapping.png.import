@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c00ocyr8rmu1q"
-path.s3tc="res://.godot/imported/anim_walk_2-9db4d35572adf59865abf4ea9cda01ac_NonOverlapping.png-93dc5dac96193812f4c790021ac399b6.s3tc.ctex"
+uid="uid://da0b3hxmxdvc6"
+path.s3tc="res://.godot/imported/Player_NonOverlapping.png-275d721178d0b6620f9b9326400f9acd.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://animations/anim_walk_2-9db4d35572adf59865abf4ea9cda01ac_NonOverlapping.png"
-dest_files=["res://.godot/imported/anim_walk_2-9db4d35572adf59865abf4ea9cda01ac_NonOverlapping.png-93dc5dac96193812f4c790021ac399b6.s3tc.ctex"]
+source_file="res://assets/Player/Player_NonOverlapping.png"
+dest_files=["res://.godot/imported/Player_NonOverlapping.png-275d721178d0b6620f9b9326400f9acd.s3tc.ctex"]
 
 [params]
 
