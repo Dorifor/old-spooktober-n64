@@ -94,9 +94,10 @@ vertical_alignment = 1
 
 [node name="Volume Slider" type="HSlider" parent="VBoxContainer/Volume"]
 layout_mode = 2
-max_value = 1.0
-step = 0.05
-value = 0.7
+min_value = -50.0
+max_value = -20.0
+step = 2.0
+value = -34.0
 
 [node name="Return Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
