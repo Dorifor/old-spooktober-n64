@@ -1,22 +1,27 @@
 extends CharacterBody3D
 
 
-var SPEED = 2.0
+var SPEED = 1.0
 const JUMP_VELOCITY = 1.5
 
 @export var horizontal_sens = 0.5
 @export var vertical_sens = 0.5
 @export var walking_speed = 0.1
-@export var run_speed = 3
+@export var run_speed = 2
 
 @export var rig: Node3D
 @export var camera_mount: Node3D
+
+@onready var animation_tree : AnimationTree = $visuals/Player/AnimationTree
+
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	animation_tree.active = true
+	
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -26,6 +31,9 @@ func _input(event):
 	if event is InputEventKey and event.is_action("pause"):
 		get_tree().quit()
 
+func _process(delta):
+	update_animation_parameters()
+	
 func _physics_process(delta):
 	if Input.is_action_pressed("run"):
 		SPEED = run_speed
@@ -54,3 +62,12 @@ func _physics_process(delta):
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+
+func update_animation_parameters():
+	var state_machine = animation_tree["parameters/playback"]
+	if(velocity == Vector3.ZERO):
+		state_machine.travel("Idle")
+	else:
+		state_machine.travel("Walk")
+		if Input.is_action_pressed("run"):
+			state_machine.travel("Run")
