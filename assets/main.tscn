@@ -1,12 +1,13 @@
-[gd_scene load_steps=33 format=3 uid="uid://cre44bvxrpn1u"]
+[gd_scene load_steps=34 format=3 uid="uid://cre44bvxrpn1u"]
 
 [ext_resource type="Texture2D" uid="uid://dfddgj5f3woqc" path="res://assets/planks/brick_25_-_128x128.png" id="1_nytqf"]
-[ext_resource type="PackedScene" uid="uid://88yv727qgtc4" path="res://assets/UI/Pause Menu/pause_menu.tscn" id="3_abh5i"]
+[ext_resource type="PackedScene" uid="uid://88yv727qgtc4" path="res://assets/ui/pause menu/pause_menu.tscn" id="3_abh5i"]
 [ext_resource type="PackedScene" uid="uid://d4l0wxpfsryqp" path="res://assets/music_player.tscn" id="5_8fnkr"]
 [ext_resource type="Texture2D" uid="uid://drkrxau4kaw31" path="res://assets/models/TEX_lamp.png" id="5_nlkla"]
 [ext_resource type="PackedScene" uid="uid://dwi6774fpqp26" path="res://assets/player/Player.tscn" id="6_4shiy"]
 [ext_resource type="Texture2D" uid="uid://dkbso7d8yiely" path="res://assets/shadow.png" id="6_ytlcb"]
 [ext_resource type="Shader" path="res://assets/UI/Shader/CRTshader.gdshader" id="7_sr3l4"]
+[ext_resource type="PackedScene" uid="uid://du4vyaqge60cf" path="res://assets/props/prop.tscn" id="8_5qy7n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gbaxg"]
 shader = ExtResource("7_sr3l4")
@@ -345,12 +346,7 @@ shadow_mesh = SubResource("ArrayMesh_xb73q")
 
 [node name="Main Scene" type="Node3D"]
 
-[node name="Pause Menu" parent="." node_paths=PackedStringArray("music_player") instance=ExtResource("3_abh5i")]
-visible = false
-music_player = NodePath("../Music Player")
-
 [node name="CRTShader" type="Control" parent="."]
-visible = false
 clip_children = 1
 material = SubResource("ShaderMaterial_gbaxg")
 layout_mode = 3
@@ -359,7 +355,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 1
+mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="CRTShader"]
 material = SubResource("ShaderMaterial_yk6t1")
@@ -369,6 +365,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Pause Menu" parent="." node_paths=PackedStringArray("music_player") instance=ExtResource("3_abh5i")]
+visible = false
+z_index = -1
+music_player = NodePath("../Music Player")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -1.47514e-07, -0.707106, 0.612372, 0.5, 0.612373, 0.353553, -0.866025, 0.353554, -3.33941, 4.3379, 2.33659)
@@ -404,6 +405,8 @@ process_mode = 3
 
 [node name="Player" parent="." node_paths=PackedStringArray("pause_menu") instance=ExtResource("6_4shiy")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.568744, 0.22493, 0)
+collision_layer = 2
+collision_mask = 5
 pause_menu = NodePath("../Pause Menu")
 
 [node name="Asset" type="Node3D" parent="."]
@@ -775,3 +778,5 @@ transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
 mesh = SubResource("ArrayMesh_mvo08")
 skeleton = NodePath("")
+
+[node name="Prop" parent="." instance=ExtResource("8_5qy7n")]
