@@ -562,6 +562,9 @@ libraries = {
 "PlayerAnimation": SubResource("AnimationLibrary_ysygc")
 }
 
+[node name="LaunchPos" type="Marker3D" parent="visuals/Player"]
+transform = Transform3D(1, -7.45058e-09, 1.62981e-09, 7.45058e-09, 1, 0, 1.86265e-09, 9.31323e-10, 1, 0.0293195, 1.04575, 0.819197)
+
 [node name="Camera_mount" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="Camera_mount"]

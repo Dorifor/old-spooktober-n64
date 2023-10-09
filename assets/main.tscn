@@ -13,8 +13,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gbaxg"]
 shader = ExtResource("7_sr3l4")
-shader_parameter/crt_curve = 0.02
-shader_parameter/crt_scan_line_color = 0.347
+shader_parameter/crt_curve = 0.923
+shader_parameter/crt_scan_line_color = 0.686
 shader_parameter/aperture_grille_rate = 0.4
 shader_parameter/rf_switch_esque_blur = 1.0
 shader_parameter/white_noise_rate = 0.0
@@ -22,10 +22,10 @@ shader_parameter/white_noise_rate = 0.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yk6t1"]
 shader = ExtResource("7_sr3l4")
 shader_parameter/crt_curve = 0.02
-shader_parameter/crt_scan_line_color = 0.347
-shader_parameter/aperture_grille_rate = 0.4
-shader_parameter/rf_switch_esque_blur = 1.0
-shader_parameter/white_noise_rate = 0.0
+shader_parameter/crt_scan_line_color = 0.2
+shader_parameter/aperture_grille_rate = 0.0
+shader_parameter/rf_switch_esque_blur = 0.5
+shader_parameter/white_noise_rate = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmnqh"]
 albedo_texture = ExtResource("1_nytqf")
@@ -361,6 +361,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="CRTShader"]
+light_mask = 0
 material = SubResource("ShaderMaterial_yk6t1")
 layout_mode = 1
 anchors_preset = 15
