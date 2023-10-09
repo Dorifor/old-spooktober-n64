@@ -1,6 +1,6 @@
 extends Control
 
-@export var player: CharacterBody3D
+@export var music_player: AudioStreamPlayer
 
 func _on_horizontal_slider_value_changed(value):
 	Globals.HORIZONTAL_SENSIBILITY_VALUE = value
@@ -12,6 +12,7 @@ func _on_vertical_slider_value_changed(value):
 
 func _on_volume_slider_value_changed(value):
 	Globals.VOLUME_VALUE = value
+	music_player.volume_db = value
 	# TODO: Probablement changer le volume des sons jsp ou si c'est deja centralise dans Godot
 
 
