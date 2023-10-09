@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cey0hutc320lh"
-path="res://.godot/imported/sword_low_new.fbx-04f1d6857620e725b56a09a4d388e2bd.scn"
+path="res://.godot/imported/sword_low_new.fbx-af43ab9eb412e5081cb1363d3937d6ed.scn"
 
 [deps]
 
-source_file="res://assets/player/weapons/sword_low_new.fbx"
-dest_files=["res://.godot/imported/sword_low_new.fbx-04f1d6857620e725b56a09a4d388e2bd.scn"]
+source_file="res://assets/Player/weapons/sword_low_new.fbx"
+dest_files=["res://.godot/imported/sword_low_new.fbx-af43ab9eb412e5081cb1363d3937d6ed.scn"]
 
 [params]
 
