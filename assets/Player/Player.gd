@@ -1,5 +1,5 @@
 extends CharacterBody3D
-
+class_name BasePlayer
 
 var SPEED = 2.0
 
