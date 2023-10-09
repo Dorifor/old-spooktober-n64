@@ -9,12 +9,11 @@ height = 0.5
 height = 0.5
 radius = 0.1
 
-[node name="StaticBody3D" type="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.53694, 0.255, 1.44397)
+[node name="Prop" type="StaticBody3D"]
 collision_layer = 4
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_cq3sf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="Collision" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_aqb2t")

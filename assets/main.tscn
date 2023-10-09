@@ -1,6 +1,7 @@
-[gd_scene load_steps=34 format=3 uid="uid://cre44bvxrpn1u"]
+[gd_scene load_steps=36 format=3 uid="uid://cre44bvxrpn1u"]
 
 [ext_resource type="Texture2D" uid="uid://dfddgj5f3woqc" path="res://assets/planks/brick_25_-_128x128.png" id="1_nytqf"]
+[ext_resource type="PackedScene" uid="uid://c0v0f7jv55gxg" path="res://assets/ui/interact.tscn" id="2_jr3q3"]
 [ext_resource type="PackedScene" uid="uid://88yv727qgtc4" path="res://assets/ui/pause menu/pause_menu.tscn" id="3_abh5i"]
 [ext_resource type="PackedScene" uid="uid://d4l0wxpfsryqp" path="res://assets/music_player.tscn" id="5_8fnkr"]
 [ext_resource type="Texture2D" uid="uid://drkrxau4kaw31" path="res://assets/models/TEX_lamp.png" id="5_nlkla"]
@@ -8,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dkbso7d8yiely" path="res://assets/shadow.png" id="6_ytlcb"]
 [ext_resource type="Shader" path="res://assets/UI/Shader/CRTshader.gdshader" id="7_sr3l4"]
 [ext_resource type="PackedScene" uid="uid://du4vyaqge60cf" path="res://assets/props/prop.tscn" id="8_5qy7n"]
+[ext_resource type="PackedScene" uid="uid://ds0nq6bl4doee" path="res://assets/player/hider/hider.tscn" id="9_dkapy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gbaxg"]
 shader = ExtResource("7_sr3l4")
@@ -347,6 +349,7 @@ shadow_mesh = SubResource("ArrayMesh_xb73q")
 [node name="Main Scene" type="Node3D"]
 
 [node name="CRTShader" type="Control" parent="."]
+visible = false
 clip_children = 1
 material = SubResource("ShaderMaterial_gbaxg")
 layout_mode = 3
@@ -365,6 +368,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Interact" parent="." instance=ExtResource("2_jr3q3")]
+visible = false
 
 [node name="Pause Menu" parent="." node_paths=PackedStringArray("music_player") instance=ExtResource("3_abh5i")]
 visible = false
@@ -405,6 +411,7 @@ process_mode = 3
 
 [node name="Player" parent="." node_paths=PackedStringArray("pause_menu") instance=ExtResource("6_4shiy")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.568744, 0.22493, 0)
+visible = false
 collision_layer = 2
 collision_mask = 5
 pause_menu = NodePath("../Pause Menu")
@@ -413,9 +420,10 @@ pause_menu = NodePath("../Pause Menu")
 
 [node name="lamp" type="StaticBody3D" parent="Asset"]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0.0709001, 0.700708, 1.90671)
+collision_layer = 4
 metadata/_edit_group_ = true
 
-[node name="pCylinder5" type="MeshInstance3D" parent="Asset/lamp"]
+[node name="Mesh" type="MeshInstance3D" parent="Asset/lamp"]
 layers = 2
 mesh = SubResource("ArrayMesh_8qu1w")
 skeleton = NodePath("")
@@ -424,8 +432,8 @@ skeleton = NodePath("")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -1.73927, 0)
 mesh = SubResource("PlaneMesh_6l3yf")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Asset/lamp"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+[node name="Collision" type="CollisionShape3D" parent="Asset/lamp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
 shape = SubResource("CylinderShape3D_1p288")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Asset/lamp"]
@@ -780,3 +788,9 @@ mesh = SubResource("ArrayMesh_mvo08")
 skeleton = NodePath("")
 
 [node name="Prop" parent="." instance=ExtResource("8_5qy7n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.66496, 0.255, 0)
+
+[node name="Player Props" parent="." node_paths=PackedStringArray("pause_menu", "interact_ui") instance=ExtResource("9_dkapy")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+pause_menu = NodePath("../Pause Menu")
+interact_ui = NodePath("../Interact")
