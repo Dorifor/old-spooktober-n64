@@ -1,14 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://cre44bvxrpn1u"]
+[gd_scene load_steps=18 format=3 uid="uid://cre44bvxrpn1u"]
 
-[ext_resource type="Texture2D" uid="uid://dfddgj5f3woqc" path="res://assets/Planks/brick_25_-_128x128.png" id="1_yj7ta"]
-[ext_resource type="PackedScene" uid="uid://dwi6774fpqp26" path="res://assets/Player/Player.tscn" id="2_cw4q1"]
+[ext_resource type="Texture2D" uid="uid://dfddgj5f3woqc" path="res://assets/planks/brick_25_-_128x128.png" id="1_nytqf"]
 [ext_resource type="PackedScene" uid="uid://88yv727qgtc4" path="res://assets/UI/Pause Menu/pause_menu.tscn" id="3_abh5i"]
 [ext_resource type="PackedScene" uid="uid://d4l0wxpfsryqp" path="res://assets/music_player.tscn" id="5_8fnkr"]
 [ext_resource type="Texture2D" uid="uid://drkrxau4kaw31" path="res://assets/models/TEX_lamp.png" id="5_nlkla"]
+[ext_resource type="PackedScene" uid="uid://dwi6774fpqp26" path="res://assets/player/Player.tscn" id="6_4shiy"]
 [ext_resource type="Texture2D" uid="uid://dkbso7d8yiely" path="res://assets/shadow.png" id="6_ytlcb"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmnqh"]
-albedo_texture = ExtResource("1_yj7ta")
+albedo_texture = ExtResource("1_nytqf")
 heightmap_scale = 16.0
 uv1_scale = Vector3(38, 38, 38)
 uv2_scale = Vector3(0, 0, 0)
@@ -28,11 +28,6 @@ albedo_color = Color(0, 0, 0, 0.721569)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hth55"]
 size = Vector3(1, 0.2, 1)
-
-[sub_resource type="Environment" id="Environment_dq58g"]
-fog_enabled = true
-fog_light_color = Color(0.184314, 0.243137, 0.294118, 1)
-fog_density = 0.2322
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ov1hj"]
 resource_name = "lambert1"
@@ -98,71 +93,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_byqca")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.1, 0)
 shape = SubResource("BoxShape3D_hth55")
 
-[node name="Player" parent="." node_paths=PackedStringArray("pause_menu") instance=ExtResource("2_cw4q1")]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.123791, 0.000500083, 0.164138)
-pause_menu = NodePath("../Pause Menu")
-
-[node name="metarig" parent="Player/visuals/Player/RootNode" index="0"]
-transform = Transform3D(108.25, -2.51889, 8.33951, -10.0389, -1.44374, 90.2546, -2.37508, -108.702, -1.39198, -0.0778533, -0.0206363, 0.0335509)
-
-[node name="Skeleton3D" parent="Player/visuals/Player/RootNode/metarig" index="0"]
-bones/1/rotation = Quaternion(-0.0694979, -0.00733214, 0.0298982, 0.997107)
-bones/1/scale = Vector3(1.00001, 1.00268, 0.998124)
-bones/2/rotation = Quaternion(-0.0934662, 0.00441271, 0.0617658, 0.993695)
-bones/2/scale = Vector3(1.00007, 1.0046, 0.996739)
-bones/3/rotation = Quaternion(0.00162175, 0.00511913, 0.0613296, 0.998103)
-bones/3/scale = Vector3(1.00002, 1.00005, 0.999957)
-bones/4/rotation = Quaternion(0.234408, -0.00382782, -0.0109534, 0.972069)
-bones/4/scale = Vector3(1, 1.03692, 0.973515)
-bones/5/rotation = Quaternion(-0.102083, -0.00533446, -0.0101106, 0.99471)
-bones/5/scale = Vector3(1.00003, 1.00646, 0.995466)
-bones/6/rotation = Quaternion(-0.107575, -0.00285873, -0.0111381, 0.994131)
-bones/6/scale = Vector3(1.00001, 1.00721, 0.994953)
-bones/8/rotation = Quaternion(-0.4703, -0.511054, -0.358875, 0.62358)
-bones/8/scale = Vector3(1.18631, 1.01526, 0.833995)
-bones/9/rotation = Quaternion(-0.433401, 0.596575, -0.613459, 0.282717)
-bones/9/scale = Vector3(1.00581, 1.19368, 0.834642)
-bones/10/rotation = Quaternion(0.133712, 0.0199238, -0.0684038, 0.988456)
-bones/10/scale = Vector3(1.00051, 1.01101, 0.991924)
-bones/11/rotation = Quaternion(0.0197265, -0.230078, -0.101719, 0.967641)
-bones/11/scale = Vector3(1.03109, 1.00123, 0.976941)
-bones/13/rotation = Quaternion(-0.497621, 0.453968, 0.326032, 0.663317)
-bones/13/scale = Vector3(1.16359, 1.03949, 0.835495)
-bones/14/rotation = Quaternion(0.266996, 0.628752, -0.599014, -0.417811)
-bones/14/scale = Vector3(1.00652, 1.1935, 0.834227)
-bones/15/rotation = Quaternion(0.163481, -0.0184077, 0.067344, 0.984073)
-bones/15/scale = Vector3(1.00052, 1.01691, 0.987716)
-bones/16/rotation = Quaternion(-0.063358, 0.0961424, 0.119906, 0.986086)
-bones/16/scale = Vector3(1.00676, 1.00165, 0.994124)
-bones/26/rotation = Quaternion(0.932033, 0.133748, -0.151374, 0.300851)
-bones/26/scale = Vector3(1.02076, 1.05445, 0.945044)
-bones/27/rotation = Quaternion(0.26626, -0.0857891, -0.0507213, 0.958735)
-bones/27/scale = Vector3(1.0029, 1.05054, 0.961217)
-bones/28/rotation = Quaternion(-0.52962, -0.0896222, 0.0957475, 0.838035)
-bones/28/scale = Vector3(1.00033, 1.17245, 0.859752)
-bones/29/rotation = Quaternion(-6.07043e-07, 0.946954, -0.321368, -1.31343e-07)
-bones/29/scale = Vector3(1, 1.073, 0.945958)
-bones/33/rotation = Quaternion(0.982165, 0.108952, 0.0312249, 0.150019)
-bones/33/scale = Vector3(1.00011, 1.01534, 0.98912)
-bones/34/rotation = Quaternion(0.128055, 0.0474949, -0.0231361, 0.990359)
-bones/34/scale = Vector3(1.0017, 1.01017, 0.991678)
-bones/35/rotation = Quaternion(-0.562906, -0.030096, 0.0626136, 0.823596)
-bones/35/scale = Vector3(1.00007, 1.18102, 0.851772)
-bones/36/rotation = Quaternion(-5.14513e-08, 0.946701, -0.322114, -1.51217e-07)
-bones/36/scale = Vector3(1, 1.07336, 0.945674)
-
-[node name="HumanoidBase_NotOverlapping" parent="Player/visuals/Player/RootNode/metarig/Skeleton3D" index="0"]
-gi_mode = 0
-
-[node name="BoneAttachment3D" parent="Player/visuals/Player/RootNode/metarig/Skeleton3D" index="1"]
-transform = Transform3D(-1.05692, 0.209048, -0.00480475, -0.189732, -0.222005, -0.906027, -0.261622, -0.960644, 0.19566, -0.00335272, -0.00139101, 0.00930458)
-
-[node name="AnimationTree" parent="Player/visuals/Player" index="1"]
-parameters/Walk/Blend2/blend_amount = 0
-
-[node name="Camera3D" parent="Player/Camera_mount" index="0"]
-environment = SubResource("Environment_dq58g")
-
 [node name="Pause Menu" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_abh5i")]
 visible = false
 player = NodePath("../Player")
@@ -198,4 +128,6 @@ distance_fade_begin = 5.9
 spot_range = 1.97107
 spot_angle = 51.7699
 
-[editable path="Player"]
+[node name="Player" parent="." node_paths=PackedStringArray("pause_menu") instance=ExtResource("6_4shiy")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.568744, 0.22493, 0)
+pause_menu = NodePath("../Pause Menu")
