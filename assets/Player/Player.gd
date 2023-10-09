@@ -11,6 +11,8 @@ var SPEED = 2.0
 @export var camera_mount: Node3D
 @export var pause_menu: Control
 
+var bulletPath = preload("res://assets/player/weapons/bullet.tscn")
+
 @onready var animation_tree : AnimationTree = $visuals/Player/AnimationTree
 
 
@@ -40,7 +42,18 @@ func _input(event):
 
 func _process(delta):
 	update_animation_parameters()
+	
+	if Input.is_action_just_pressed("attack"):
+		shoot()
 
+func shoot():
+	var bullet = bulletPath.instantiate()
+	get_parent().add_child(bullet)
+	bullet.position = $visuals/Player/LaunchPos.global_position
+	bullet.transform.basis = $visuals/Player/LaunchPos.global_transform.basis
+	get_parent().add_child(bullet)
+	
+	
 func _physics_process(delta):
 	if Input.is_action_pressed("run"):
 		SPEED = run_speed
@@ -85,5 +98,5 @@ func update_animation_parameters():
 		state_machine.travel("Walk")
 		if Input.is_action_pressed("run"):
 			state_machine.travel("Run")
-	if Input.is_action_pressed("attack"):
-		state_machine.travel("Attack")
+#	if Input.is_action_pressed("attack"):
+#		state_machine.travel("Attack")

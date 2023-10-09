@@ -10,8 +10,8 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gbaxg"]
 shader = ExtResource("7_sr3l4")
-shader_parameter/crt_curve = 0.02
-shader_parameter/crt_scan_line_color = 0.347
+shader_parameter/crt_curve = 0.923
+shader_parameter/crt_scan_line_color = 0.686
 shader_parameter/aperture_grille_rate = 0.4
 shader_parameter/rf_switch_esque_blur = 1.0
 shader_parameter/white_noise_rate = 0.0
@@ -19,10 +19,10 @@ shader_parameter/white_noise_rate = 0.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yk6t1"]
 shader = ExtResource("7_sr3l4")
 shader_parameter/crt_curve = 0.02
-shader_parameter/crt_scan_line_color = 0.347
-shader_parameter/aperture_grille_rate = 0.4
-shader_parameter/rf_switch_esque_blur = 1.0
-shader_parameter/white_noise_rate = 0.0
+shader_parameter/crt_scan_line_color = 0.2
+shader_parameter/aperture_grille_rate = 0.0
+shader_parameter/rf_switch_esque_blur = 0.5
+shader_parameter/white_noise_rate = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmnqh"]
 albedo_texture = ExtResource("1_nytqf")
@@ -345,10 +345,6 @@ shadow_mesh = SubResource("ArrayMesh_xb73q")
 
 [node name="Main Scene" type="Node3D"]
 
-[node name="Pause Menu" parent="." node_paths=PackedStringArray("music_player") instance=ExtResource("3_abh5i")]
-visible = false
-music_player = NodePath("../Music Player")
-
 [node name="CRTShader" type="Control" parent="."]
 visible = false
 clip_children = 1
@@ -362,6 +358,7 @@ grow_vertical = 2
 mouse_filter = 1
 
 [node name="ColorRect" type="ColorRect" parent="CRTShader"]
+light_mask = 0
 material = SubResource("ShaderMaterial_yk6t1")
 layout_mode = 1
 anchors_preset = 15
@@ -369,6 +366,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Pause Menu" parent="." node_paths=PackedStringArray("music_player") instance=ExtResource("3_abh5i")]
+visible = false
+music_player = NodePath("../Music Player")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -1.47514e-07, -0.707106, 0.612372, 0.5, 0.612373, 0.353553, -0.866025, 0.353554, -3.33941, 4.3379, 2.33659)
