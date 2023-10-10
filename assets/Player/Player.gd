@@ -40,7 +40,7 @@ func _input(event):
 	if event is InputEventKey and event.is_action("pause"):
 		pause()
 
-func _process(delta):
+func _process(_delta):
 	update_animation_parameters()
 	
 	if Input.is_action_just_pressed("attack"):
