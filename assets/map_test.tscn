@@ -1,17 +1,18 @@
-[gd_scene load_steps=35 format=3 uid="uid://cyflvex77ugkm"]
+[gd_scene load_steps=31 format=3 uid="uid://me5vdxwq1hsv"]
 
-[ext_resource type="Shader" path="res://assets/ui/Shader/CRTshader.gdshader" id="1_4w7wm"]
-[ext_resource type="Script" path="res://assets/Map1.gd" id="1_36t1n"]
-[ext_resource type="Texture2D" uid="uid://dfddgj5f3woqc" path="res://assets/planks/brick_25_-_128x128.png" id="1_nytqf"]
-[ext_resource type="PackedScene" uid="uid://c0v0f7jv55gxg" path="res://assets/ui/interact.tscn" id="2_jr3q3"]
-[ext_resource type="PackedScene" uid="uid://88yv727qgtc4" path="res://assets/ui/Pause Menu/pause_menu.tscn" id="3_abh5i"]
-[ext_resource type="PackedScene" uid="uid://d4l0wxpfsryqp" path="res://assets/music_player.tscn" id="5_8fnkr"]
-[ext_resource type="Texture2D" uid="uid://drkrxau4kaw31" path="res://assets/models/TEX_lamp.png" id="5_nlkla"]
-[ext_resource type="Texture2D" uid="uid://dkbso7d8yiely" path="res://assets/shadow.png" id="6_ytlcb"]
-[ext_resource type="PackedScene" uid="uid://du4vyaqge60cf" path="res://assets/props/prop.tscn" id="8_5qy7n"]
+[ext_resource type="Shader" path="res://assets/ui/Shader/CRTshader.gdshader" id="1_prvcv"]
+[ext_resource type="PackedScene" uid="uid://c0v0f7jv55gxg" path="res://assets/ui/interact.tscn" id="2_uydor"]
+[ext_resource type="PackedScene" uid="uid://88yv727qgtc4" path="res://assets/ui/pause menu/pause_menu.tscn" id="3_qavpe"]
+[ext_resource type="Texture2D" uid="uid://dfddgj5f3woqc" path="res://assets/planks/brick_25_-_128x128.png" id="4_ooqws"]
+[ext_resource type="PackedScene" uid="uid://d4l0wxpfsryqp" path="res://assets/music_player.tscn" id="5_kyepd"]
+[ext_resource type="PackedScene" uid="uid://dwi6774fpqp26" path="res://assets/player/Player.tscn" id="6_bhqda"]
+[ext_resource type="PackedScene" uid="uid://dcspb4a6ib7rn" path="res://assets/props/lamp.tscn" id="7_7bnyd"]
+[ext_resource type="PackedScene" uid="uid://du4vyaqge60cf" path="res://assets/props/trashcan.tscn" id="8_71ony"]
+[ext_resource type="PackedScene" uid="uid://ds0nq6bl4doee" path="res://assets/player/hider/hider.tscn" id="9_l3jar"]
+[ext_resource type="PackedScene" uid="uid://bhcfxwgtwohhk" path="res://assets/props/prop.tscn" id="10_ouafy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gbaxg"]
-shader = ExtResource("1_4w7wm")
+shader = ExtResource("1_prvcv")
 shader_parameter/crt_curve = 0.923
 shader_parameter/crt_scan_line_color = 0.686
 shader_parameter/aperture_grille_rate = 0.4
@@ -19,7 +20,7 @@ shader_parameter/rf_switch_esque_blur = 1.0
 shader_parameter/white_noise_rate = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yk6t1"]
-shader = ExtResource("1_4w7wm")
+shader = ExtResource("1_prvcv")
 shader_parameter/crt_curve = 0.01
 shader_parameter/crt_scan_line_color = 0.0
 shader_parameter/aperture_grille_rate = 0.0
@@ -27,7 +28,7 @@ shader_parameter/rf_switch_esque_blur = 0.0
 shader_parameter/white_noise_rate = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmnqh"]
-albedo_texture = ExtResource("1_nytqf")
+albedo_texture = ExtResource("4_ooqws")
 heightmap_scale = 16.0
 uv1_scale = Vector3(38, 38, 38)
 uv2_scale = Vector3(0, 0, 0)
@@ -313,9 +314,9 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_xb73q")
 
 [node name="Main Scene" type="Node3D"]
-script = ExtResource("1_36t1n")
 
 [node name="CRTShader" type="Control" parent="."]
+visible = false
 clip_children = 1
 material = SubResource("ShaderMaterial_gbaxg")
 layout_mode = 3
@@ -336,16 +337,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Interact" parent="." instance=ExtResource("2_jr3q3")]
+[node name="Interact" parent="." instance=ExtResource("2_uydor")]
 visible = false
 
-[node name="pause Menu" parent="." node_paths=PackedStringArray("music_player") instance=ExtResource("3_abh5i")]
+[node name="Pause Menu" parent="." node_paths=PackedStringArray("music_player") instance=ExtResource("3_qavpe")]
 visible = false
 z_index = -1
 music_player = NodePath("../Music Player")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -1.47514e-07, -0.707106, 0.612372, 0.5, 0.612373, 0.353553, -0.866025, 0.353554, -3.33941, 4.3379, 2.33659)
+visible = false
 shadow_enabled = true
 shadow_blur = 0.5
 
@@ -372,28 +374,31 @@ surface_material_override/0 = SubResource("StandardMaterial3D_byqca")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.1, 0)
 shape = SubResource("BoxShape3D_hth55")
 
-[node name="Music Player" parent="." instance=ExtResource("5_8fnkr")]
+[node name="Music Player" parent="." instance=ExtResource("5_kyepd")]
 process_mode = 3
+
+[node name="Player" parent="." node_paths=PackedStringArray("pause_menu") instance=ExtResource("6_bhqda")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.568744, 0.22493, 0)
+visible = false
+collision_layer = 2
+collision_mask = 5
+pause_menu = NodePath("../Pause Menu")
 
 [node name="Asset" type="Node3D" parent="."]
 
-[node name="lamp" parent="Asset" instance=ExtResource("7_b0ka7")]
+[node name="lamp" parent="Asset" instance=ExtResource("7_7bnyd")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 2, 0.705, 0)
 
 [node name="house" type="StaticBody3D" parent="Asset"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.451279, -9.7925)
+collision_layer = 5
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Asset/house"]
+[node name="Collision" type="CollisionShape3D" parent="Asset/house"]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0.491084, 1.10864, 0.517595)
 shape = SubResource("BoxShape3D_md2oj")
 
-[node name="visual" type="Node3D" parent="Asset/house"]
-transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0, 0)
-
-[node name="RootNode" type="Node3D" parent="Asset/house/visual"]
-
-[node name="house" type="MeshInstance3D" parent="Asset/house/visual/RootNode"]
-transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 3.12899, 8.99786, 3.21704)
+[node name="Mesh" type="MeshInstance3D" parent="Asset/house"]
+transform = Transform3D(15, 0, 0, 0, -1.78814e-06, 15, 0, -15, -1.78814e-06, 0.469349, 1.34968, 0.482556)
 mesh = SubResource("ArrayMesh_mvo08")
 skeleton = NodePath("")
 
@@ -720,9 +725,12 @@ transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 
 mesh = SubResource("ArrayMesh_mvo08")
 skeleton = NodePath("")
 
-[node name="Trashcan" parent="." instance=ExtResource("8_5qy7n")]
+[node name="Trashcan" parent="." instance=ExtResource("8_71ony")]
 transform = Transform3D(0.579, 0, 0, 0, 0.579, 0, 0, 0, 0.579, -2.66496, 0.255914, 0)
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://assets/player/Player.tscn")
-spawn_path = NodePath("..")
+[node name="Player Props" parent="." node_paths=PackedStringArray("pause_menu", "interact_ui") instance=ExtResource("9_l3jar")]
+pause_menu = NodePath("../Pause Menu")
+interact_ui = NodePath("../Interact")
+
+[node name="Prop" parent="." instance=ExtResource("10_ouafy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.73258, 0.255, 3.38555)
