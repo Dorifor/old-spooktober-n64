@@ -8,11 +8,12 @@ signal player_disconnected(peer_id)
 signal server_disconnected
 
 const PORT = 7000
-const DEFAULT_SERVER_IP = "127.0.0.1" # IPv4 localhost
+var DEFAULT_SERVER_IP = "127.0.0.1" # IPv4 localhost
 const MAX_CONNECTIONS = 20
 
 @onready var online_menu = $Menu/CanvasLayer
 @onready var lobby = $lobby/CanvasLayer
+@onready var AdressIP = $Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer/AdressEntry
 
 # This will contain player info for every player,
 # with the keys being each player's unique IDs.
@@ -43,6 +44,7 @@ func _on_join_button_pressed(address = "localhost"):
 	online_menu.hide()
 	lobby.show()
 	$lobby/CanvasLayer/Start_game.hide()
+	DEFAULT_SERVER_IP = AdressIP.text
 	if address.is_empty():
 		address = DEFAULT_SERVER_IP
 	var peer = ENetMultiplayerPeer.new()
