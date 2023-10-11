@@ -13,18 +13,27 @@ var SPEED = 2.0
 
 var bulletPath = preload("res://assets/player/weapons/bullet.tscn")
 
-@onready var animation_tree : AnimationTree = $visuals/Player/AnimationTree
+@onready var animation_tree : AnimationTree = $visuals/Character/AnimationTree
+@onready var camera : Camera3D = $Camera_mount/Camera3D
 
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+func _enter_tree():
+	set_multiplayer_authority(str(name).to_int())
+
+	
 func _ready():
+	if not is_multiplayer_authority(): return
+	
+	camera.current = true
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	animation_tree.active = true
+	
 
 func _input(event):
-	
+	if not is_multiplayer_authority(): return
 	var horizontal_sens = Globals.HORIZONTAL_SENSIBILITY_VALUE
 	var vertical_sens = Globals.VERTICAL_SENSIBILITY_VALUE 
 	
@@ -41,7 +50,8 @@ func _input(event):
 		pause()
 
 func _process(delta):
-	update_animation_parameters()
+	if not is_multiplayer_authority(): return
+	update_animation_parameters.rpc()
 	
 	if Input.is_action_just_pressed("attack"):
 		shoot()
@@ -49,12 +59,13 @@ func _process(delta):
 func shoot():
 	var bullet = bulletPath.instantiate()
 	get_parent().add_child(bullet)
-	bullet.position = $visuals/Player/LaunchPos.global_position
-	bullet.transform.basis = $visuals/Player/LaunchPos.global_transform.basis
+	bullet.position = $visuals/Character/LaunchPos.global_position
+	bullet.transform.basis = $visuals/Character/LaunchPos.global_transform.basis
 	get_parent().add_child(bullet)
 	
 	
 func _physics_process(delta):
+	if not is_multiplayer_authority(): return
 	if Input.is_action_pressed("run"):
 		SPEED = run_speed
 	else:
@@ -85,11 +96,13 @@ func _physics_process(delta):
 	move_and_slide()
 
 func pause():
+
 	Globals.IS_GAME_PAUSED = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	pause_menu.visible = true
 	get_tree().paused = true
 
+@rpc("call_local")
 func update_animation_parameters():
 	var state_machine = animation_tree["parameters/playback"]
 	if(velocity == Vector3.ZERO):
@@ -98,5 +111,3 @@ func update_animation_parameters():
 		state_machine.travel("Walk")
 		if Input.is_action_pressed("run"):
 			state_machine.travel("Run")
-#	if Input.is_action_pressed("attack"):
-#		state_machine.travel("Attack")

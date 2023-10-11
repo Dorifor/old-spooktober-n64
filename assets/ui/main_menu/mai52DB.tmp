@@ -1,0 +1,107 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbua5yo0dvsfs"]
+
+[ext_resource type="Script" path="res://assets/ui/main_menu/Online.gd" id="1_30xfh"]
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Online" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_30xfh")
+
+[node name="Menu" type="Control" parent="Online"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Online/Menu"]
+
+[node name="MainMenu" type="PanelContainer" parent="Online/Menu/CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Online/Menu/CanvasLayer/MainMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Online/Menu/CanvasLayer/MainMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Online/Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Main Menu"
+
+[node name="PseudoEntry" type="LineEdit" parent="Online/Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "a"
+placeholder_text = "Pseudo"
+
+[node name="HostButton" type="Button" parent="Online/Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="Online/Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Join"
+
+[node name="AdressEntry" type="LineEdit" parent="Online/Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Adress"
+
+[node name="lobby" type="Control" parent="Online"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Online/lobby"]
+visible = false
+
+[node name="Player List" type="ItemList" parent="Online/lobby/CanvasLayer"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -364.0
+offset_top = -162.0
+offset_bottom = 162.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Start_game" type="Button" parent="Online/lobby/CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -46.5
+offset_top = -31.0
+offset_right = 46.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Start game"
+
+[connection signal="player_connected" from="Online" to="Online" method="_on_player_connected"]
+[connection signal="player_disconnected" from="Online" to="Online" method="_on_player_disconnected"]
+[connection signal="server_disconnected" from="Online" to="Online" method="_on_server_disconnected"]
+[connection signal="pressed" from="Online/Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="Online" method="_on_host_button_pressed"]
+[connection signal="pressed" from="Online/Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="Online" method="_on_join_button_pressed"]
+[connection signal="pressed" from="Online/lobby/CanvasLayer/Start_game" to="Online" method="_on_start_game_pressed"]
