@@ -13,6 +13,7 @@ func _ready():
 		print(player)
 		
 func add_player(peer_id):
+	if not is_multiplayer_authority(): return
 	var player = Player.instantiate()
 	player.name = str(peer_id)
 	add_child(player)
