@@ -7,10 +7,13 @@ extends Node3D
 const Player = preload("res://assets/player/Player.tscn")
 
 func _ready():
+	await get_tree().process_frame
 	for player in Globals.PLAYER_DATA.keys():
 		add_player(player)
+		print(player)
 		
 func add_player(peer_id):
 	var player = Player.instantiate()
 	player.name = str(peer_id)
 	add_child(player)
+
