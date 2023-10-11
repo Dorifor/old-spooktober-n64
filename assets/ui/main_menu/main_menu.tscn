@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://bbua5yo0dvsfs"]
+[gd_scene load_steps=23 format=3 uid="uid://bbua5yo0dvsfs"]
 
 [ext_resource type="Script" path="res://assets/ui/main_menu/Online.gd" id="1_30xfh"]
 [ext_resource type="Shader" path="res://assets/ui/Shader/CRTshader.gdshader" id="1_exdyw"]
+[ext_resource type="Script" path="res://assets/ui/main_menu/BaseMenu.gd" id="2_n8tsx"]
 [ext_resource type="Texture2D" uid="uid://dfddgj5f3woqc" path="res://assets/planks/brick_25_-_128x128.png" id="3_cs8je"]
 [ext_resource type="Script" path="res://assets/ui/main_menu/Menu Camera.gd" id="4_2uc4b"]
 
@@ -336,6 +337,67 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="BaseMenu" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_n8tsx")
+
+[node name="Label" type="Label" parent="BaseMenu"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 26.0
+grow_horizontal = 0
+text = "JEU"
+
+[node name="Play" type="Button" parent="BaseMenu"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -15.5
+offset_bottom = 15.5
+grow_horizontal = 0
+grow_vertical = 2
+text = "JOUER"
+
+[node name="Option" type="Button" parent="BaseMenu"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = 23.0
+offset_bottom = 54.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "OPTIONS"
+
+[node name="Quit" type="Button" parent="BaseMenu"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = 96.0
+offset_bottom = 127.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "QUITTER"
+
 [node name="Online" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
@@ -348,6 +410,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Online/Menu"]
+visible = false
 
 [node name="MainMenu" type="PanelContainer" parent="Online/Menu/CanvasLayer"]
 anchors_preset = 8
@@ -708,7 +771,8 @@ mesh = SubResource("ArrayMesh_4y7r8")
 skeleton = NodePath("")
 
 [node name="Menu Camera" type="Camera3D" parent="BackgroundRender"]
-transform = Transform3D(-0.276272, 0, -0.961079, 0, 1, 0, 0.961079, 0, -0.276272, 0, 1.39838, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.39838, 0)
+current = true
 script = ExtResource("4_2uc4b")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BackgroundRender/Menu Camera"]
@@ -717,6 +781,9 @@ libraries = {
 "": SubResource("AnimationLibrary_vlmh4")
 }
 
+[connection signal="pressed" from="BaseMenu/Play" to="BaseMenu" method="_on_play_pressed"]
+[connection signal="pressed" from="BaseMenu/Option" to="BaseMenu" method="_on_option_pressed"]
+[connection signal="pressed" from="BaseMenu/Quit" to="BaseMenu" method="_on_quit_pressed"]
 [connection signal="player_connected" from="Online" to="Online" method="_on_player_connected"]
 [connection signal="player_disconnected" from="Online" to="Online" method="_on_player_disconnected"]
 [connection signal="server_disconnected" from="Online" to="Online" method="_on_server_disconnected"]

@@ -4,9 +4,9 @@
 [ext_resource type="Script" path="res://assets/Map1.gd" id="1_36t1n"]
 [ext_resource type="Texture2D" uid="uid://dfddgj5f3woqc" path="res://assets/planks/brick_25_-_128x128.png" id="1_nytqf"]
 [ext_resource type="PackedScene" uid="uid://c0v0f7jv55gxg" path="res://assets/ui/interact.tscn" id="2_jr3q3"]
-[ext_resource type="PackedScene" uid="uid://88yv727qgtc4" path="res://assets/ui/pause menu/pause_menu.tscn" id="3_abh5i"]
+[ext_resource type="PackedScene" uid="uid://88yv727qgtc4" path="res://assets/ui/Pause Menu/pause_menu.tscn" id="3_abh5i"]
 [ext_resource type="PackedScene" uid="uid://d4l0wxpfsryqp" path="res://assets/music_player.tscn" id="5_8fnkr"]
-[ext_resource type="PackedScene" uid="uid://du4vyaqge60cf" path="res://assets/props/trashcan.tscn" id="8_5qy7n"]
+[ext_resource type="PackedScene" uid="uid://du4vyaqge60cf" path="res://assets/props/prop.tscn" id="8_5qy7n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gbaxg"]
 shader = ExtResource("1_4w7wm")
@@ -337,8 +337,7 @@ grow_vertical = 2
 [node name="Interact" parent="." instance=ExtResource("2_jr3q3")]
 visible = false
 
-[node name="Pause Menu" parent="." node_paths=PackedStringArray("music_player") instance=ExtResource("3_abh5i")]
-process_mode = 0
+[node name="pause Menu" parent="." node_paths=PackedStringArray("music_player") instance=ExtResource("3_abh5i")]
 visible = false
 z_index = -1
 music_player = NodePath("../Music Player")
