@@ -380,8 +380,8 @@ process_mode = 3
 [node name="Player" parent="." node_paths=PackedStringArray("pause_menu") instance=ExtResource("6_bhqda")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.568744, 0.22493, 0)
 visible = false
-collision_layer = 2
 collision_mask = 5
+walking_speed = 1
 pause_menu = NodePath("../Pause Menu")
 
 [node name="Asset" type="Node3D" parent="."]
