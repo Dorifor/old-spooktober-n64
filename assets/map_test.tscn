@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://me5vdxwq1hsv"]
+[gd_scene load_steps=32 format=3 uid="uid://me5vdxwq1hsv"]
 
 [ext_resource type="Shader" path="res://assets/ui/Shader/CRTshader.gdshader" id="1_prvcv"]
 [ext_resource type="PackedScene" uid="uid://c0v0f7jv55gxg" path="res://assets/ui/interact.tscn" id="2_uydor"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://du4vyaqge60cf" path="res://assets/props/trashcan.tscn" id="8_71ony"]
 [ext_resource type="PackedScene" uid="uid://ds0nq6bl4doee" path="res://assets/player/hider/hider.tscn" id="9_l3jar"]
 [ext_resource type="PackedScene" uid="uid://bhcfxwgtwohhk" path="res://assets/props/prop.tscn" id="10_ouafy"]
+[ext_resource type="PackedScene" uid="uid://bwwj70wbash25" path="res://assets/models/ghost.glb" id="11_3tfwj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gbaxg"]
 shader = ExtResource("1_prvcv")
@@ -381,7 +382,6 @@ process_mode = 3
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.568744, 0.22493, 0)
 visible = false
 collision_mask = 5
-walking_speed = 1
 pause_menu = NodePath("../Pause Menu")
 
 [node name="Asset" type="Node3D" parent="."]
@@ -734,3 +734,6 @@ interact_ui = NodePath("../Interact")
 
 [node name="Prop" parent="." instance=ExtResource("10_ouafy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.73258, 0.255, 3.38555)
+
+[node name="ghost" parent="." instance=ExtResource("11_3tfwj")]
+transform = Transform3D(-0.0520945, 0, 0.295442, 0, 0.3, 0, -0.295442, 0, -0.0520945, 0.0806731, 0.492024, -5.41195)

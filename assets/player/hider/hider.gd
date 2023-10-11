@@ -31,7 +31,9 @@ var camera_long_distance = 3
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-
+func _on_bullet_colliding():
+	print("OUCH")
+	# TODO: Kill the player or smth
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
