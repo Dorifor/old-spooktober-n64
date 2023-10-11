@@ -1,8 +1,5 @@
-[gd_scene load_steps=2 format=3 uid="uid://d4l0wxpfsryqp"]
-
-[ext_resource type="AudioStream" uid="uid://d2sht0tfjmaaf" path="res://assets/sounds/Epic Sax Guy - Tecno Edition.mp3" id="1_3md3k"]
+[gd_scene format=3 uid="uid://d4l0wxpfsryqp"]
 
 [node name="Music Player" type="AudioStreamPlayer"]
-stream = ExtResource("1_3md3k")
 volume_db = -34.0
 autoplay = true
