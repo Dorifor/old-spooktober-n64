@@ -45,8 +45,7 @@ func _on_join_button_pressed(address = "localhost"):
 	lobby.show()
 	$lobby/CanvasLayer/Start_game.hide()
 	DEFAULT_SERVER_IP = AdressIP.text
-	if address.is_empty():
-		address = DEFAULT_SERVER_IP
+	address = DEFAULT_SERVER_IP
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_client(address, PORT)
 	if error:
