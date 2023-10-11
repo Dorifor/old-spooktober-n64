@@ -101,7 +101,6 @@ func pause():
 	Globals.IS_GAME_PAUSED = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	pause_menu.visible = true
-#	get_tree().paused = true
 
 
 @rpc("call_local")
