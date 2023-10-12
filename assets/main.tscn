@@ -720,5 +720,5 @@ skeleton = NodePath("")
 transform = Transform3D(0.579, 0, 0, 0, 0.579, 0, 0, 0, 0.579, -2.66496, 0.255914, 0)
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://assets/player/Player.tscn")
+_spawnable_scenes = PackedStringArray("res://assets/player/Player.tscn", "res://assets/player/hider/hider.tscn")
 spawn_path = NodePath("..")

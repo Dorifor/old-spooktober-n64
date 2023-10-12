@@ -31,16 +31,24 @@ var camera_long_distance = 3
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+func _enter_tree():
+	set_multiplayer_authority(str(name).to_int())
+	
 func _on_bullet_colliding():
 	print("OUCH")
 	# TODO: Kill the player or smth
 
 func _ready():
+	if not is_multiplayer_authority(): return
+	
+	camera.current = true
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	interact_ui = get_tree().get_root().get_node("Main Scene/Interact")
 
 
 func _input(event):
+	if not is_multiplayer_authority(): return
+	
 	var horizontal_sens = Globals.HORIZONTAL_SENSIBILITY_VALUE
 	var vertical_sens = Globals.VERTICAL_SENSIBILITY_VALUE 
 	
@@ -65,6 +73,8 @@ func _input(event):
 
 
 func transform_into_prop():
+	if not is_multiplayer_authority(): return
+	
 	var focused_mesh: MeshInstance3D = focused_prop.get_node("Mesh")
 	var focused_collision: CollisionShape3D = focused_prop.get_node("Collision")
 	hider_mesh.mesh = focused_mesh.mesh
@@ -76,6 +86,8 @@ func transform_into_prop():
 
 
 func activate_power():
+	if not is_multiplayer_authority(): return
+	
 	is_short = true
 	scale /= 2
 	speed_factor = 3
@@ -86,6 +98,8 @@ func activate_power():
 
 
 func disable_power(just_transformed: bool = false):
+	if not is_multiplayer_authority(): return
+	
 	if not is_short: return
 	ability_timer.stop()
 	ability_cooldown_timer.start()
@@ -98,14 +112,18 @@ func disable_power(just_transformed: bool = false):
 
 
 func _process(_delta):
+	if not is_multiplayer_authority(): return
+	
 	interact_ui.visible = raycast.is_colliding()
 	is_focusing_prop = raycast.is_colliding()
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
-		focused_prop = collider
+		#focused_prop = collider
 
 
 func _physics_process(delta):
+	if not is_multiplayer_authority(): return
+	
 	var speed: float
 	if Input.is_action_pressed("run"):
 		speed = run_speed
@@ -139,6 +157,8 @@ func _physics_process(delta):
 
 
 func pause():
+	if not is_multiplayer_authority(): return
+	
 	Globals.IS_GAME_PAUSED = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	pause_menu.visible = true

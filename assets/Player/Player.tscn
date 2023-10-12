@@ -4,10 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://cvdhqyp8rqiex" path="res://assets/player/Player-96878cc2017709d4e7c7aeaabb880b49_NonOverlapping (Custom).png" id="2_36llu"]
 [ext_resource type="PackedScene" uid="uid://dl7tgrlaahein" path="res://assets/player/weapons/bullet.tscn" id="2_xtieg"]
 [ext_resource type="PackedScene" uid="uid://cey0hutc320lh" path="res://assets/player/weapons/sword_low_new.fbx" id="3_w5q3a"]
-[ext_resource type="Animation" uid="uid://cr2teovcyfjue" path="res://assets/player/Animation/A_Attack.res" id="4_chgux"]
-[ext_resource type="Animation" uid="uid://b4ereetvvh4xb" path="res://assets/player/Animation/A_Idle.res" id="5_pj85e"]
-[ext_resource type="Animation" uid="uid://bssvnahhqtn52" path="res://assets/player/Animation/A_Run.res" id="6_1y7tc"]
-[ext_resource type="Animation" uid="uid://cxhs6gl5v1m8r" path="res://assets/player/Animation/A_Walk.res" id="7_c518p"]
+[ext_resource type="Animation" uid="uid://cr2teovcyfjue" path="res://assets/player/animation/A_Attack.res" id="4_chgux"]
+[ext_resource type="Animation" uid="uid://b4ereetvvh4xb" path="res://assets/player/animation/A_Idle.res" id="5_pj85e"]
+[ext_resource type="Animation" uid="uid://bssvnahhqtn52" path="res://assets/player/animation/A_Run.res" id="6_1y7tc"]
+[ext_resource type="Animation" uid="uid://cxhs6gl5v1m8r" path="res://assets/player/animation/A_Walk.res" id="7_c518p"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_by24f"]
 resource_name = "Humanoid_NotOverlapping"

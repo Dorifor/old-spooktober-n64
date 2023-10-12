@@ -11,10 +11,10 @@ func _ready():
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 	
 	await get_tree().process_frame
-	#add_player(1)
-	add_PropsPlayer(1)
-#	for player in Globals.PLAYER_DATA.keys():
-#		add_player(player)
+	add_player(1)
+	for player in Globals.PLAYER_DATA.keys():
+		if player != 1:
+			add_PropsPlayer(player)
 		
 func add_player(peer_id):
 	if not is_multiplayer_authority(): return
