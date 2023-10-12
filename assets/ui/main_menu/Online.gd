@@ -19,6 +19,7 @@ const MAX_CONNECTIONS = 20
 # with the keys being each player's unique IDs.
 var players = {}
 
+var timeout_timer
 # This is the local player info. This should be modified locally
 # before the connection is made. It will be passed to every other peer.
 # For example, the value of "name" can be set to something the player
@@ -48,6 +49,8 @@ func _on_join_button_pressed(address = "localhost"):
 	address = DEFAULT_SERVER_IP
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_client(address, PORT)
+	
+	print (error)
 	if error:
 		return error
 	multiplayer.multiplayer_peer = peer
@@ -130,7 +133,7 @@ func _on_connected_fail():
 func _on_server_disconnected():
 	multiplayer.multiplayer_peer = null
 	players.clear()
-	server_disconnected.emit()
+	get_tree().change_scene_to_file("res://assets/ui/main_menu/main_menu.tscn")
 
 
 func _on_start_game_pressed():
@@ -145,3 +148,8 @@ func start_game():
 	Globals.ID_CURRENTPLAYER = multiplayer.get_unique_id()
 	print(players.size())
 	get_tree().change_scene_to_file("res://assets/main.tscn")
+
+
+func _on_timer_timeout():
+	
+	return

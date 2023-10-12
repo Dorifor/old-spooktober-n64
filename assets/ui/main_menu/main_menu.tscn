@@ -363,9 +363,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -57.0
-offset_top = -15.5
-offset_bottom = 15.5
+offset_left = -63.0
+offset_top = -90.0
+offset_right = -6.0
+offset_bottom = -59.0
 grow_horizontal = 0
 grow_vertical = 2
 text = "JOUER"
@@ -377,9 +378,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -70.0
-offset_top = 23.0
-offset_bottom = 54.0
+offset_left = -83.0
+offset_top = -40.0
+offset_right = -4.0
+offset_bottom = -9.0
 grow_horizontal = 0
 grow_vertical = 2
 text = "OPTIONS"
@@ -391,9 +393,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -75.0
-offset_top = 96.0
-offset_bottom = 127.0
+offset_left = -89.0
+offset_top = 284.0
+offset_right = -14.0
+offset_bottom = 315.0
 grow_horizontal = 0
 grow_vertical = 2
 text = "QUITTER"
@@ -497,6 +500,10 @@ offset_bottom = -89.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Start game"
+
+[node name="Timer" type="Timer" parent="Online"]
+wait_time = 3.0
+one_shot = true
 
 [node name="BackgroundRender" type="Node3D" parent="."]
 
@@ -790,3 +797,4 @@ libraries = {
 [connection signal="pressed" from="Online/Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="Online" method="_on_host_button_pressed"]
 [connection signal="pressed" from="Online/Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="Online" method="_on_join_button_pressed"]
 [connection signal="pressed" from="Online/lobby/CanvasLayer/Start_game" to="Online" method="_on_start_game_pressed"]
+[connection signal="timeout" from="Online/Timer" to="Online" method="_on_timer_timeout"]

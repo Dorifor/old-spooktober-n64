@@ -337,7 +337,8 @@ grow_vertical = 2
 [node name="Interact" parent="." instance=ExtResource("2_jr3q3")]
 visible = false
 
-[node name="pause Menu" parent="." node_paths=PackedStringArray("music_player") instance=ExtResource("3_abh5i")]
+[node name="Pause Menu" parent="." node_paths=PackedStringArray("music_player") instance=ExtResource("3_abh5i")]
+process_mode = 0
 visible = false
 z_index = -1
 music_player = NodePath("../Music Player")

@@ -34,6 +34,7 @@ func _ready():
 
 func _input(event):
 	if not is_multiplayer_authority(): return
+	
 	var horizontal_sens = Globals.HORIZONTAL_SENSIBILITY_VALUE
 	var vertical_sens = Globals.VERTICAL_SENSIBILITY_VALUE 
 	
@@ -48,12 +49,18 @@ func _input(event):
 		
 	if event is InputEventKey and event.is_action("pause"):
 		pause()
-
-
+	
 func _process(delta):
 	if not is_multiplayer_authority(): return
-	update_animation_parameters.rpc()
 	
+	if(velocity == Vector3.ZERO):
+		idle_animation_parameters.rpc()
+	else:
+		if Input.is_action_pressed("run"):
+			update_animation_parameters.rpc()
+		else :
+			walk_animation_parameters.rpc()
+			
 	if Input.is_action_just_pressed("attack"):
 		shoot()
 
@@ -104,12 +111,18 @@ func pause():
 #	get_tree().paused = true
 
 
+func _unhandled_input(event):
+	if not is_multiplayer_authority(): return
+	
+	
+	
+	
 @rpc("call_local")
 func update_animation_parameters():
-	var state_machine = animation_tree["parameters/playback"]
-	if(velocity == Vector3.ZERO):
-		state_machine.travel("Idle")
-	else:
-		state_machine.travel("Walk")
-		if Input.is_action_pressed("run"):
-			state_machine.travel("Run")
+	$visuals/Character/AnimationPlayer.play("PlayerAnimation/A_Run")
+@rpc("call_local")
+func idle_animation_parameters():
+	$visuals/Character/AnimationPlayer.play("PlayerAnimation/A_Idle")
+@rpc("call_local")	
+func walk_animation_parameters():
+	$visuals/Character/AnimationPlayer.play("PlayerAnimation/A_Walk")
