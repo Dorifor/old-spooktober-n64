@@ -128,6 +128,9 @@ func _on_connected_ok():
 
 func _on_connected_fail():
 	multiplayer.multiplayer_peer = null
+	$"../AlertBox".show()
+	$"../AlertBox/Message".text = "Hôte non trouvé"
+	
 
 
 func _on_server_disconnected():
@@ -150,6 +153,9 @@ func start_game():
 	get_tree().change_scene_to_file("res://assets/main.tscn")
 
 
-func _on_timer_timeout():
-	
-	return
+
+func _on_validation_button_pressed():
+	$"../AlertBox".hide()
+	multiplayer.multiplayer_peer = null
+	players.clear()
+	get_tree().change_scene_to_file("res://assets/ui/main_menu/main_menu.tscn")

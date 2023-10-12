@@ -7,6 +7,8 @@ extends Node3D
 const Player = preload("res://assets/player/Player.tscn")
 
 func _ready():
+	multiplayer.server_disconnected.connect(_on_server_disconnected)
+	
 	await get_tree().process_frame
 	for player in Globals.PLAYER_DATA.keys():
 		add_player(player)
@@ -17,4 +19,10 @@ func add_player(peer_id):
 	var player = Player.instantiate()
 	player.name = str(peer_id)
 	add_child(player)
+
+func _on_server_disconnected():
+	multiplayer.multiplayer_peer = null
+	Globals.PLAYER_DATA.clear()
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	get_tree().change_scene_to_file("res://assets/ui/main_menu/main_menu.tscn")
 

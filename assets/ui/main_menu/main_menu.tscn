@@ -501,9 +501,50 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Start game"
 
-[node name="Timer" type="Timer" parent="Online"]
-wait_time = 3.0
-one_shot = true
+[node name="AlertBox" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Message" type="Label" parent="AlertBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.5
+offset_top = -81.0
+offset_right = 74.5
+offset_bottom = -55.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "MESSAGE OH LA LA"
+
+[node name="Validation button" type="Button" parent="AlertBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -16.5
+offset_right = 44.0
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "OK"
 
 [node name="BackgroundRender" type="Node3D" parent="."]
 
@@ -797,4 +838,4 @@ libraries = {
 [connection signal="pressed" from="Online/Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="Online" method="_on_host_button_pressed"]
 [connection signal="pressed" from="Online/Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="Online" method="_on_join_button_pressed"]
 [connection signal="pressed" from="Online/lobby/CanvasLayer/Start_game" to="Online" method="_on_start_game_pressed"]
-[connection signal="timeout" from="Online/Timer" to="Online" method="_on_timer_timeout"]
+[connection signal="pressed" from="AlertBox/Validation button" to="Online" method="_on_validation_button_pressed"]
