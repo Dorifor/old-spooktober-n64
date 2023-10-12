@@ -1,10 +1,12 @@
-[gd_scene load_steps=23 format=3 uid="uid://bbua5yo0dvsfs"]
+[gd_scene load_steps=26 format=3 uid="uid://bbua5yo0dvsfs"]
 
 [ext_resource type="Script" path="res://assets/ui/main_menu/Online.gd" id="1_30xfh"]
 [ext_resource type="Shader" path="res://assets/ui/Shader/CRTshader.gdshader" id="1_exdyw"]
 [ext_resource type="Script" path="res://assets/ui/main_menu/BaseMenu.gd" id="2_n8tsx"]
+[ext_resource type="Theme" uid="uid://rry0vxdb3l3k" path="res://assets/ui/styles/main_menu_theme.tres" id="3_8nyf7"]
 [ext_resource type="Texture2D" uid="uid://dfddgj5f3woqc" path="res://assets/planks/brick_25_-_128x128.png" id="3_cs8je"]
 [ext_resource type="Script" path="res://assets/ui/main_menu/Menu Camera.gd" id="4_2uc4b"]
+[ext_resource type="FontFile" uid="uid://64n7qesgoljr" path="res://assets/fonts/Outfit-Black.ttf" id="4_lbp0i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pmbes"]
 shader = ExtResource("1_exdyw")
@@ -21,6 +23,10 @@ shader_parameter/crt_scan_line_color = 0.0
 shader_parameter/aperture_grille_rate = 0.0
 shader_parameter/rf_switch_esque_blur = 0.0
 shader_parameter/white_noise_rate = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_qx6wc"]
+font = ExtResource("4_lbp0i")
+font_size = 48
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hsedh"]
 albedo_texture = ExtResource("3_cs8je")
@@ -354,7 +360,9 @@ anchor_right = 1.0
 offset_left = -40.0
 offset_bottom = 26.0
 grow_horizontal = 0
-text = "JEU"
+theme = ExtResource("3_8nyf7")
+text = "SPOOKTOBER N64 (lol)"
+label_settings = SubResource("LabelSettings_qx6wc")
 
 [node name="Play" type="Button" parent="BaseMenu"]
 layout_mode = 1
@@ -363,12 +371,12 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -63.0
-offset_top = -90.0
-offset_right = -6.0
-offset_bottom = -59.0
+offset_left = -69.0
+offset_top = -43.5
+offset_bottom = -6.5
 grow_horizontal = 0
 grow_vertical = 2
+theme = ExtResource("3_8nyf7")
 text = "JOUER"
 
 [node name="Option" type="Button" parent="BaseMenu"]
@@ -378,12 +386,12 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -83.0
-offset_top = -40.0
-offset_right = -4.0
-offset_bottom = -9.0
+offset_left = -88.0
+offset_top = 6.5
+offset_bottom = 43.5
 grow_horizontal = 0
 grow_vertical = 2
+theme = ExtResource("3_8nyf7")
 text = "OPTIONS"
 
 [node name="Quit" type="Button" parent="BaseMenu"]
@@ -399,6 +407,7 @@ offset_right = -14.0
 offset_bottom = 315.0
 grow_horizontal = 0
 grow_vertical = 2
+theme = ExtResource("3_8nyf7")
 text = "QUITTER"
 
 [node name="Online" type="Control" parent="."]
