@@ -118,7 +118,7 @@ func _process(_delta):
 	is_focusing_prop = raycast.is_colliding()
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
-		#focused_prop = collider
+		focused_prop = collider
 
 
 func _physics_process(delta):
