@@ -37,6 +37,7 @@ func _on_bullet_colliding():
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	interact_ui = get_tree().get_root().get_node("Main Scene/Interact")
 
 
 func _input(event):

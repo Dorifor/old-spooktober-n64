@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dfddgj5f3woqc" path="res://assets/planks/brick_25_-_128x128.png" id="4_ooqws"]
 [ext_resource type="PackedScene" uid="uid://d4l0wxpfsryqp" path="res://assets/music_player.tscn" id="5_kyepd"]
 [ext_resource type="PackedScene" uid="uid://dwi6774fpqp26" path="res://assets/player/Player.tscn" id="6_bhqda"]
-[ext_resource type="PackedScene" uid="uid://dcspb4a6ib7rn" path="res://assets/props/lamp.tscn" id="7_7bnyd"]
+[ext_resource type="PackedScene" uid="uid://buq0vob7sl6lb" path="res://assets/props/lamp.tscn" id="7_7bnyd"]
 [ext_resource type="PackedScene" uid="uid://du4vyaqge60cf" path="res://assets/props/trashcan.tscn" id="8_71ony"]
 [ext_resource type="PackedScene" uid="uid://ds0nq6bl4doee" path="res://assets/player/hider/hider.tscn" id="9_l3jar"]
 [ext_resource type="PackedScene" uid="uid://bhcfxwgtwohhk" path="res://assets/props/prop.tscn" id="10_ouafy"]
