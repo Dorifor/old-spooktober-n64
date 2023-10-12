@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cyflvex77ugkm"]
+[gd_scene load_steps=28 format=3 uid="uid://cyflvex77ugkm"]
 
 [ext_resource type="Shader" path="res://assets/ui/Shader/CRTshader.gdshader" id="1_4w7wm"]
 [ext_resource type="Script" path="res://assets/Map1.gd" id="1_36t1n"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://88yv727qgtc4" path="res://assets/ui/Pause Menu/pause_menu.tscn" id="3_abh5i"]
 [ext_resource type="PackedScene" uid="uid://d4l0wxpfsryqp" path="res://assets/music_player.tscn" id="5_8fnkr"]
 [ext_resource type="PackedScene" uid="uid://du4vyaqge60cf" path="res://assets/props/prop.tscn" id="8_5qy7n"]
-[ext_resource type="PackedScene" uid="uid://ds0nq6bl4doee" path="res://assets/player/hider/hider.tscn" id="8_oiynu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gbaxg"]
 shader = ExtResource("1_4w7wm")
@@ -723,14 +722,3 @@ transform = Transform3D(0.579, 0, 0, 0, 0.579, 0, 0, 0, 0.579, -2.66496, 0.25591
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://assets/player/Player.tscn")
 spawn_path = NodePath("..")
-
-[node name="Hider" parent="." node_paths=PackedStringArray("pause_menu", "interact_ui") instance=ExtResource("8_oiynu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.94358, 0, 0)
-pause_menu = NodePath("../Pause Menu")
-interact_ui = NodePath("../Interact")
-
-[node name="Camera3D" parent="Hider/Camera_mount" index="0"]
-visible = false
-current = false
-
-[editable path="Hider"]
