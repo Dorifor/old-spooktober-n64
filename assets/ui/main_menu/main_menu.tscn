@@ -1,15 +1,16 @@
-[gd_scene load_steps=26 format=3 uid="uid://bbua5yo0dvsfs"]
+[gd_scene load_steps=27 format=3 uid="uid://bbua5yo0dvsfs"]
 
-[ext_resource type="Script" path="res://assets/ui/main_menu/Online.gd" id="1_30xfh"]
-[ext_resource type="Shader" path="res://assets/ui/Shader/CRTshader.gdshader" id="1_exdyw"]
-[ext_resource type="Script" path="res://assets/ui/main_menu/BaseMenu.gd" id="2_n8tsx"]
+[ext_resource type="Shader" path="res://assets/ui/shader/CRTshader.gdshader" id="1_6g2t5"]
+[ext_resource type="Script" path="res://assets/ui/main_menu/base_menu.gd" id="2_jf80g"]
 [ext_resource type="Theme" uid="uid://rry0vxdb3l3k" path="res://assets/ui/styles/main_menu_theme.tres" id="3_8nyf7"]
 [ext_resource type="Texture2D" uid="uid://dfddgj5f3woqc" path="res://assets/planks/brick_25_-_128x128.png" id="3_cs8je"]
-[ext_resource type="Script" path="res://assets/ui/main_menu/Menu Camera.gd" id="4_2uc4b"]
 [ext_resource type="FontFile" uid="uid://64n7qesgoljr" path="res://assets/fonts/Outfit-Black.ttf" id="4_lbp0i"]
+[ext_resource type="Script" path="res://assets/ui/main_menu/online.gd" id="5_8r2nd"]
+[ext_resource type="PackedScene" uid="uid://cyflvex77ugkm" path="res://assets/main.tscn" id="6_jrsdt"]
+[ext_resource type="Script" path="res://assets/ui/main_menu/menu_camera.gd" id="8_s4yhq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pmbes"]
-shader = ExtResource("1_exdyw")
+shader = ExtResource("1_6g2t5")
 shader_parameter/crt_curve = 0.923
 shader_parameter/crt_scan_line_color = 0.686
 shader_parameter/aperture_grille_rate = 0.4
@@ -17,7 +18,7 @@ shader_parameter/rf_switch_esque_blur = 1.0
 shader_parameter/white_noise_rate = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6muyn"]
-shader = ExtResource("1_exdyw")
+shader = ExtResource("1_6g2t5")
 shader_parameter/crt_curve = 0.01
 shader_parameter/crt_scan_line_color = 0.0
 shader_parameter/aperture_grille_rate = 0.0
@@ -343,14 +344,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BaseMenu" type="Control" parent="."]
+[node name="BaseMenu" type="Control" parent="." node_paths=PackedStringArray("online_panel")]
+z_index = -1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("2_n8tsx")
+script = ExtResource("2_jf80g")
+online_panel = NodePath("../Online")
 
 [node name="Label" type="Label" parent="BaseMenu"]
 layout_mode = 1
@@ -410,68 +413,83 @@ grow_vertical = 2
 theme = ExtResource("3_8nyf7")
 text = "QUITTER"
 
-[node name="Online" type="Control" parent="."]
+[node name="Online" type="Control" parent="." node_paths=PackedStringArray("menu_panel", "lobby_panel", "ip_address_input", "username_input", "player_list", "start_game_button", "alert_box", "alert_message")]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_30xfh")
+script = ExtResource("5_8r2nd")
+menu_panel = NodePath("Menu")
+lobby_panel = NodePath("Lobby")
+ip_address_input = NodePath("Menu/MainMenu/MarginContainer/VBoxContainer/Address Input")
+username_input = NodePath("Menu/MainMenu/MarginContainer/VBoxContainer/Username Input")
+player_list = NodePath("Lobby/Player List")
+start_game_button = NodePath("Lobby/Start Button")
+alert_box = NodePath("../Alert Box")
+alert_message = NodePath("../Alert Box/Message")
+main_scene = ExtResource("6_jrsdt")
 
 [node name="Menu" type="Control" parent="Online"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Online/Menu"]
-visible = false
-
-[node name="MainMenu" type="PanelContainer" parent="Online/Menu/CanvasLayer"]
+[node name="MainMenu" type="PanelContainer" parent="Online/Menu"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -277.0
-offset_top = -112.0
-offset_right = 278.0
-offset_bottom = 88.0
+offset_left = 279.0
+offset_top = 188.0
+offset_right = 834.0
+offset_bottom = 396.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_8nyf7")
 
-[node name="MarginContainer" type="MarginContainer" parent="Online/Menu/CanvasLayer/MainMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="Online/Menu/MainMenu"]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Online/Menu/CanvasLayer/MainMenu/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Online/Menu/MainMenu/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Online/Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+[node name="Title Label" type="Label" parent="Online/Menu/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme = ExtResource("3_8nyf7")
 text = "Online"
 
-[node name="PseudoEntry" type="LineEdit" parent="Online/Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+[node name="Username Input" type="LineEdit" parent="Online/Menu/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
-placeholder_text = "Pseudo"
+theme = ExtResource("3_8nyf7")
+placeholder_text = "Username"
 alignment = 1
 
-[node name="HostButton" type="Button" parent="Online/Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+[node name="Address Input" type="LineEdit" parent="Online/Menu/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Host"
-
-[node name="JoinButton" type="Button" parent="Online/Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Join"
-
-[node name="AdressEntry" type="LineEdit" parent="Online/Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
+theme = ExtResource("3_8nyf7")
 placeholder_text = "Adress"
 alignment = 1
 
-[node name="lobby" type="Control" parent="Online"]
+[node name="Host Button" type="Button" parent="Online/Menu/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_8nyf7")
+text = "Host"
+
+[node name="Join Button" type="Button" parent="Online/Menu/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_8nyf7")
+text = "Join"
+
+[node name="Lobby" type="Control" parent="Online"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -479,38 +497,38 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Online/lobby"]
-visible = false
-
-[node name="Player List" type="ItemList" parent="Online/lobby/CanvasLayer"]
+[node name="Player List" type="ItemList" parent="Online/Lobby"]
+layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -283.0
-offset_top = -185.5
-offset_bottom = 185.5
+offset_left = 829.0
+offset_top = 118.5
+offset_right = 1112.0
+offset_bottom = 489.5
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 
-[node name="Start_game" type="Button" parent="Online/lobby/CanvasLayer"]
+[node name="Start Button" type="Button" parent="Online/Lobby"]
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 390.0
-offset_top = -120.0
-offset_right = 483.0
-offset_bottom = -89.0
+offset_left = 946.0
+offset_top = 488.0
+offset_right = 1039.0
+offset_bottom = 519.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "Start game"
 
-[node name="AlertBox" type="Control" parent="."]
+[node name="Alert Box" type="Control" parent="."]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -525,7 +543,7 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Message" type="Label" parent="AlertBox"]
+[node name="Message" type="Label" parent="Alert Box"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -540,7 +558,7 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "MESSAGE OH LA LA"
 
-[node name="Validation button" type="Button" parent="AlertBox"]
+[node name="Validation button" type="Button" parent="Alert Box"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -830,7 +848,7 @@ skeleton = NodePath("")
 [node name="Menu Camera" type="Camera3D" parent="BackgroundRender"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.39838, 0)
 current = true
-script = ExtResource("4_2uc4b")
+script = ExtResource("8_s4yhq")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="BackgroundRender/Menu Camera"]
 speed_scale = 0.01
@@ -844,7 +862,7 @@ libraries = {
 [connection signal="player_connected" from="Online" to="Online" method="_on_player_connected"]
 [connection signal="player_disconnected" from="Online" to="Online" method="_on_player_disconnected"]
 [connection signal="server_disconnected" from="Online" to="Online" method="_on_server_disconnected"]
-[connection signal="pressed" from="Online/Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostButton" to="Online" method="_on_host_button_pressed"]
-[connection signal="pressed" from="Online/Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinButton" to="Online" method="_on_join_button_pressed"]
-[connection signal="pressed" from="Online/lobby/CanvasLayer/Start_game" to="Online" method="_on_start_game_pressed"]
-[connection signal="pressed" from="AlertBox/Validation button" to="Online" method="_on_validation_button_pressed"]
+[connection signal="pressed" from="Online/Menu/MainMenu/MarginContainer/VBoxContainer/Host Button" to="Online" method="_on_host_button_pressed"]
+[connection signal="pressed" from="Online/Menu/MainMenu/MarginContainer/VBoxContainer/Join Button" to="Online" method="_on_join_button_pressed"]
+[connection signal="pressed" from="Online/Lobby/Start Button" to="Online" method="_on_start_game_pressed"]
+[connection signal="pressed" from="Alert Box/Validation button" to="Online" method="_on_validation_button_pressed"]

@@ -1,22 +1,17 @@
 extends CharacterBody3D
-class_name BasePlayer
+class_name BaseCharacter
 
-var SPEED = 2.0
-
-@export var walking_speed = 1
-@export var run_speed = 2
+@export var walking_speed = 2
+@export var run_speed = 4
 @export var jump_velocity = 2.3
+@export var speed_factor = 1
 
 @export var rig: Node3D
 @export var camera_mount: Node3D
-@export var bullet_scene: PackedScene
-@export var animation_tree: AnimationTree
 @export var camera: Camera3D
 
 @export var pause_menu: Control
 
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _enter_tree():
@@ -25,10 +20,9 @@ func _enter_tree():
 
 func _ready():
 	if not is_multiplayer_authority(): return
-	
+	print("BASE CHARACTER READY")
 	camera.current = true
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	animation_tree.active = true
 	pause_menu = get_tree().get_root().get_node("Main Scene/Pause Menu")
 
 
@@ -49,36 +43,21 @@ func _input(event):
 		
 	if event is InputEventKey and event.is_action("pause"):
 		pause()
-	
-func _process(delta):
+
+
+func _process(_delta):
 	if not is_multiplayer_authority(): return
-	
-	if(velocity == Vector3.ZERO):
-		idle_animation_parameters.rpc()
-	else:
-		if Input.is_action_pressed("run"):
-			update_animation_parameters.rpc()
-		else :
-			walk_animation_parameters.rpc()
-			
-	if Input.is_action_just_pressed("attack"):
-		shoot()
-
-
-func shoot():
-	var bullet = bullet_scene.instantiate()
-	get_parent().add_child(bullet)
-	bullet.position = $visuals/Character/LaunchPos.global_position
-	bullet.transform.basis = $visuals/Character/LaunchPos.global_transform.basis
-	get_parent().add_child(bullet)
 
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
+	
+	var speed: float
 	if Input.is_action_pressed("run"):
-		SPEED = run_speed
+		speed = run_speed
 	else:
-		SPEED = walking_speed
+		speed = walking_speed
+	speed *= speed_factor
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -88,40 +67,24 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = jump_velocity
 	
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	
 	var input_dir = Input.get_vector("left", "right", "forward", "backward")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
 		
 		rig.look_at(position + -direction)
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, speed)
+		velocity.z = move_toward(velocity.z, 0, speed)
+
 	move_and_slide()
 
 
 func pause():
+	if not is_multiplayer_authority(): return
+	
 	Globals.IS_GAME_PAUSED = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	pause_menu.visible = true
-
-
-func _unhandled_input(event):
-	if not is_multiplayer_authority(): return
-	
-	
-	
-	
-@rpc("call_local")
-func update_animation_parameters():
-	$visuals/Character/AnimationPlayer.play("PlayerAnimation/A_Run")
-@rpc("call_local")
-func idle_animation_parameters():
-	$visuals/Character/AnimationPlayer.play("PlayerAnimation/A_Idle")
-@rpc("call_local")	
-func walk_animation_parameters():
-	$visuals/Character/AnimationPlayer.play("PlayerAnimation/A_Walk")
+	get_tree().paused = true

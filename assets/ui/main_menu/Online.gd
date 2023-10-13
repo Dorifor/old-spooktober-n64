@@ -1,7 +1,5 @@
 extends Node
 
-# Autoload named Lobby
-
 # These signals can be connected to by a UI lobby scene or the game scene.
 signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
@@ -11,23 +9,23 @@ const PORT = 7000
 var DEFAULT_SERVER_IP = "127.0.0.1" # IPv4 localhost
 const MAX_CONNECTIONS = 20
 
-@onready var online_menu = $Menu/CanvasLayer
-@onready var lobby = $lobby/CanvasLayer
-@onready var AdressIP = $Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer/AdressEntry
+@export var menu_panel: Control
+@export var lobby_panel: Control
+@export var ip_address_input: LineEdit
+@export var username_input: LineEdit
+@export var player_list: ItemList
+@export var start_game_button: Button
+@export var alert_box: Control
+@export var alert_message: Label
 
-# This will contain player info for every player,
-# with the keys being each player's unique IDs.
+@export var main_menu_scene: PackedScene
+@export var main_scene: PackedScene
+
 var players = {}
 
-var timeout_timer
-# This is the local player info. This should be modified locally
-# before the connection is made. It will be passed to every other peer.
-# For example, the value of "name" can be set to something the player
-# entered in a UI scene.
 var player_info = {"name": "Default"}
 
 var players_loaded = 0
-
 
 
 func _ready():
@@ -39,34 +37,38 @@ func _ready():
 
 
 func _on_join_button_pressed(address = "localhost"):
-	if $Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer/PseudoEntry.text == "":
-		return
-	player_info = {"name": $Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer/PseudoEntry.text}
-	online_menu.hide()
-	lobby.show()
-	$lobby/CanvasLayer/Start_game.hide()
-	DEFAULT_SERVER_IP = AdressIP.text
+	if username_input.text == "": return
+	
+	player_info = {"name": username_input.text}
+	menu_panel.hide()
+	lobby_panel.show()
+	start_game_button.hide()
+	DEFAULT_SERVER_IP = ip_address_input.text
 	address = DEFAULT_SERVER_IP
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_client(address, PORT)
 	
 	print (error)
+	
 	if error:
 		return error
+	
 	multiplayer.multiplayer_peer = peer
 	print(players)
 
 
 func _on_host_button_pressed():
-	if $Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer/PseudoEntry.text == "":
-		return
-	player_info = {"name": $Menu/CanvasLayer/MainMenu/MarginContainer/VBoxContainer/PseudoEntry.text}
-	online_menu.hide()
-	lobby.show()
+	if username_input.text == "": return
+	
+	player_info = {"name": username_input.text}
+	menu_panel.hide()
+	lobby_panel.show()
 	var peer = ENetMultiplayerPeer.new()
 	var error = peer.create_server(PORT, MAX_CONNECTIONS)
+	
 	if error:
 		return error
+	
 	multiplayer.multiplayer_peer = peer
 	players[1] = player_info
 	player_connected.emit(1, player_info)
@@ -83,13 +85,14 @@ func remove_multiplayer_peer():
 func load_game(game_scene_path):
 	get_tree().change_scene_to_file(game_scene_path)
 
+
 @rpc("any_peer", "call_local", "reliable")
 func update_list():
-	$"lobby/CanvasLayer/Player List".clear()
+	player_list.clear()
 	for player in players.values():
-		$"lobby/CanvasLayer/Player List".add_item(player["name"], null, false)
+		player_list.add_item(player["name"], null, false)
 
-		
+
 # Every peer will call this when they have loaded the game scene.
 @rpc("any_peer", "call_local", "reliable")
 func player_loaded():
@@ -102,9 +105,8 @@ func player_loaded():
 
 func _process(delta):
 	update_list()
-	
-# When a peer connects, send them my player info.
-# This allows transfer of all desired data for each player, not only the unique ID.
+
+
 func _on_player_connected(id):
 	_register_player.rpc_id(id, player_info)
 
@@ -118,8 +120,9 @@ func _register_player(new_player_info):
 
 func _on_player_disconnected(id):
 	players.erase(id)
-	#player_disconnected.emit(id)
- 
+	# player_disconnected.emit(id)
+
+
 func _on_connected_ok():
 	var peer_id = multiplayer.get_unique_id()
 	players[peer_id] = player_info
@@ -128,34 +131,32 @@ func _on_connected_ok():
 
 func _on_connected_fail():
 	multiplayer.multiplayer_peer = null
-	$"../AlertBox".show()
-	$"../AlertBox/Message".text = "Hôte non trouvé"
-	
+	alert_box.show()
+	alert_message.text = "Hôte non trouvé"
 
 
 func _on_server_disconnected():
 	multiplayer.multiplayer_peer = null
 	players.clear()
-	get_tree().change_scene_to_file("res://assets/ui/main_menu/main_menu.tscn")
+	get_tree().change_scene_to_packed(main_menu_scene)
 
 
 func _on_start_game_pressed():
 		start_game()  # Appel de la RPC start_game sur le serveur
 		rpc("start_game")  # Appel de la RPC start_game sur les clients
-	
-	
+
+
 @rpc("any_peer", "call_remote", "reliable")
 func start_game():
 	Globals.PLAYER_NUMBER = players.size()
 	Globals.PLAYER_DATA = players
 	Globals.ID_CURRENTPLAYER = multiplayer.get_unique_id()
 	print(players.size())
-	get_tree().change_scene_to_file("res://assets/main.tscn")
-
+	get_tree().change_scene_to_packed(main_scene)
 
 
 func _on_validation_button_pressed():
-	$"../AlertBox".hide()
+	alert_box.hide()
 	multiplayer.multiplayer_peer = null
 	players.clear()
-	get_tree().change_scene_to_file("res://assets/ui/main_menu/main_menu.tscn")
+	get_tree().change_scene_to_packed(main_menu_scene)
